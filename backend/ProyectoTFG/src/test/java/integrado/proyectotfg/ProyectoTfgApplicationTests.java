@@ -1,10 +1,10 @@
-package integrado.proyectofinaldmt;
+package integrado.proyectotfg;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProyectoFinalDmtApplicationTests {
+class ProyectoTfgApplicationTests {
 
 	@Test
 	void contextLoads() {
