@@ -10,9 +10,6 @@ public interface ActividadesServices {
     List<Actividades> listarActividades();
     List<Actividades> listarActividadesPorTipo(String tipo);
     List<Actividades> buscarActividadesPorNombre(String busqueda);
-    public Actividades crearActividadConTipo(
-            Ofertantes ofertante,
-            Actividades nuevaActividad,
-            Long tipoActividadId);
 
+    Actividades guardarActividad(Actividades actividad);
 }

@@ -1,6 +1,10 @@
 package integrado.proyectotfg.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tipo_actividad")
@@ -18,9 +22,9 @@ public class TipoActividad {
     }
 
     //RELACION
-    @ManyToOne
-    @JoinColumn(name = "id_actividades")
-    private Actividades actividades;
+    @OneToMany(mappedBy = "tipoActividad", cascade = CascadeType.ALL)
+    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
+    private Set<Actividades> actividades = new HashSet<>();
 
     public void setId(Long id) {
         this.id = id;
@@ -46,11 +50,11 @@ public class TipoActividad {
         this.descripcion = descripcion;
     }
 
-    public Actividades getActividades() {
+    public Set<Actividades> getActividades() {
         return actividades;
     }
 
-    public void setActividades(Actividades actividades) {
+    public void setActividades(Set<Actividades> actividades) {
         this.actividades = actividades;
     }
 }

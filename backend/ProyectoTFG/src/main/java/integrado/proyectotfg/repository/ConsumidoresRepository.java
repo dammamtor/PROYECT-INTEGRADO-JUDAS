@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConsumidoresRepository extends JpaRepository<Consumidores, Long> {
+    Consumidores findByNombreAndApellidos(String nombre, String apellidos);
 }

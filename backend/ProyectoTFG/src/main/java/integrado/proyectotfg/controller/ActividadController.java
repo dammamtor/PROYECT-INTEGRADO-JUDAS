@@ -25,4 +25,9 @@ public class ActividadController {
 
         return ResponseEntity.ok(listaFiltrada);
     }
+    @GetMapping("/actividades/buscar/{busqueda}")
+    public ResponseEntity<List<Actividades>> buscarActividadesPorNombre(@PathVariable String busqueda){
+        List<Actividades> listaFiltrada = actividadesServices.buscarActividadesPorNombre(busqueda);
+        return ResponseEntity.ok(listaFiltrada);
+    }
 }

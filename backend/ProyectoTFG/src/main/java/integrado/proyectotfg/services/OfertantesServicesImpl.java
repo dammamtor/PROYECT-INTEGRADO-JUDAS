@@ -1,16 +1,22 @@
 package integrado.proyectotfg.services;
 
+import integrado.proyectotfg.model.Actividades;
 import integrado.proyectotfg.model.Ofertantes;
+import integrado.proyectotfg.repository.ActividadesRepository;
 import integrado.proyectotfg.repository.OfertantesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OfertantesServicesImpl implements OfertantesServices {
     @Autowired
     private OfertantesRepository repository;
+
+    @Autowired
+    private ActividadesRepository actividadesRepository;
 
     @Override
     public List<Ofertantes> listarOfertantes() {
@@ -19,7 +25,17 @@ public class OfertantesServicesImpl implements OfertantesServices {
 
     @Override
     public Ofertantes guardarOfertante(Ofertantes ofertante) {
-        return repository.save(ofertante);    }
+        // Verificar si ya existe un ofertante con el mismo nombre y apellidos
+        Ofertantes ofertanteExistente = repository.findByNombreAndApellidos(ofertante.getNombre(), ofertante.getApellidos());
+
+        if (ofertanteExistente != null) {
+            // Si ya existe un ofertante con el mismo nombre y apellidos, puedes lanzar una excepción o manejarlo de otra forma
+            throw new IllegalArgumentException("Ya existe un ofertante con el mismo nombre y apellidos.");
+        }
+
+        // Si no existe un ofertante con el mismo nombre y apellidos, guardar el nuevo ofertante
+        return repository.save(ofertante);
+    }
 
     @Override
     public Ofertantes obtenerOfertantePorId(Long id) {
@@ -49,5 +65,27 @@ public class OfertantesServicesImpl implements OfertantesServices {
                 .orElseThrow(() -> new RuntimeException("No existe un ofertante con el ID: " + id));
 
         repository.delete(ofertante);
+    }
+
+    @Override
+    public void eliminarActividadOfertante(Long ofertanteId, Long actividadId) {
+        Ofertantes ofertante = repository.findById(ofertanteId)
+                .orElseThrow(() -> new RuntimeException("No existe un ofertante con el ID: " + ofertanteId));
+
+        // Desempaquetar el Optional para obtener la instancia de Actividades
+        Actividades actividad = actividadesRepository.findById(actividadId)
+                .orElseThrow(() -> new RuntimeException("No existe una actividad con el ID: " + actividadId));
+
+        if (actividad == null) {
+            throw new RuntimeException("No existe una actividad con el ID: " + actividadId);
+        }
+
+        // Verificar si la actividad pertenece al ofertante
+        if (!actividad.getOfertante().equals(ofertante)) {
+            throw new RuntimeException("La actividad no pertenece al ofertante con el ID: " + ofertanteId);
+        }
+
+        // Eliminar la actividad
+        actividadesRepository.delete(actividad);
     }
 }

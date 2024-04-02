@@ -1,10 +1,14 @@
 package integrado.proyectotfg.controller;
 
 import integrado.proyectotfg.model.Actividades;
+import integrado.proyectotfg.model.DTO.ActividadesRequestDTO;
 import integrado.proyectotfg.model.Ofertantes;
+import integrado.proyectotfg.model.TipoActividad;
+import integrado.proyectotfg.repository.TipoActividadRepository;
 import integrado.proyectotfg.services.ActividadesServicesImpl;
 import integrado.proyectotfg.services.OfertantesServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +25,9 @@ public class OfertantesController {
 
     @Autowired
     private ActividadesServicesImpl actividadesService;
+
+    @Autowired
+    private TipoActividadRepository tipoActividadRepository;
 
 
     @GetMapping("/ofertantes")
@@ -56,13 +63,51 @@ public class OfertantesController {
 
     //metodo para asignarle una actividad a un ofertante
     @PostMapping("/ofertantes/{ofertanteId}/actividades")
-    public ResponseEntity<Actividades> agregarActividadOfertante(
+    public ResponseEntity<Actividades> crearActividadParaOfertante(
             @PathVariable Long ofertanteId,
-            @RequestParam Long tipoActividadId,
-            @RequestBody Actividades nuevaActividad
-    ) {
+            @RequestBody ActividadesRequestDTO actividadDTO)
+    {
         Ofertantes ofertante = ofertantesService.obtenerOfertantePorId(ofertanteId);
+        if (ofertante == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-        return ResponseEntity.ok(actividadesService.crearActividadConTipo(ofertante, nuevaActividad, tipoActividadId));
+        // Obtener el tipo de actividad seleccionado del DTO
+        Long tipoActividadId = actividadDTO.getTipoActividadId();
+        TipoActividad tipoActividad = tipoActividadRepository.findById(tipoActividadId).orElse(null);
+        if (tipoActividad == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Crear la actividad
+        Actividades actividad = new Actividades();
+        actividad.setNombre(actividadDTO.getNombre());
+        actividad.setDescripcion(actividadDTO.getDescripcion());
+        actividad.setFec_inicio(actividadDTO.getFec_inicio());
+        actividad.setFec_final(actividadDTO.getFec_final());
+        actividad.setPrecio(actividadDTO.getPrecio());
+        actividad.setMateriales(actividadDTO.getMateriales());
+        actividad.setOfertante(ofertante);
+        actividad.setTipoActividad(tipoActividad);
+
+        // Guardar la actividad
+        Actividades actividadGuardada = actividadesService.guardarActividad(actividad);
+        return ResponseEntity.ok(actividadGuardada);
     }
+
+    @DeleteMapping("/ofertantes/{ofertanteId}/actividades/{actividadId}")
+    public ResponseEntity<Map<String, Object>> eliminarActividadOfertante(@PathVariable Long ofertanteId, @PathVariable Long actividadId) {
+        try {
+            ofertantesService.eliminarActividadOfertante(ofertanteId, actividadId);
+            Map<String, Object> respuesta = new HashMap<>();
+            respuesta.put("eliminado", Boolean.TRUE);
+            return ResponseEntity.ok(respuesta);
+        } catch (RuntimeException e) {
+            Map<String, Object> respuesta = new HashMap<>();
+            respuesta.put("eliminado", Boolean.FALSE);
+            respuesta.put("mensaje", "Error al eliminar la actividad: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+        }
+    }
+
 }

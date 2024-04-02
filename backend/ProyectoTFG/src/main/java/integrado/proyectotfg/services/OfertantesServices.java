@@ -10,4 +10,6 @@ public interface OfertantesServices {
     Ofertantes obtenerOfertantePorId(Long id);
     Ofertantes actualizarOfertante(Ofertantes detallesOf);
     void eliminarOfertante(Long id);
+
+    void eliminarActividadOfertante(Long ofertanteId, Long actividadId);
 }

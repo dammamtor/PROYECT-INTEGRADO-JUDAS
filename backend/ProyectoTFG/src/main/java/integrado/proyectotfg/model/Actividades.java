@@ -1,5 +1,6 @@
 package integrado.proyectotfg.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -29,10 +30,13 @@ public class Actividades {
     //RELACIONES
     @ManyToOne
     @JoinColumn(name = "id_ofertantes")
+    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
+
     private Ofertantes ofertante;
 
-    @OneToMany(mappedBy = "actividades", cascade = CascadeType.ALL)
-    private Set<TipoActividad> tipoActividads;
+    @ManyToOne
+    @JoinColumn(name = "tipo_actividad_id")
+    private TipoActividad tipoActividad;
 
     public Actividades() {
     }
@@ -101,11 +105,11 @@ public class Actividades {
         this.ofertante = ofertante;
     }
 
-    public Set<TipoActividad> getTipoActividads() {
-        return tipoActividads;
+    public TipoActividad getTipoActividad() {
+        return tipoActividad;
     }
 
-    public void setTipoActividads(Set<TipoActividad> tipoActividads) {
-        this.tipoActividads = tipoActividads;
+    public void setTipoActividad(TipoActividad tipoActividad) {
+        this.tipoActividad = tipoActividad;
     }
 }
