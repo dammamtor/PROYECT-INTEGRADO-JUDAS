@@ -36,4 +36,10 @@ public class ActividadesServicesImpl implements ActividadesServices {
         return actividadesRepository.save(actividad);
     }
 
+    @Override
+    public Actividades obtenerActividadPorId(Long idActividad) {
+        return actividadesRepository.findById(idActividad)
+                .orElseThrow(() -> new RuntimeException("No se encontró una actividad con el ID: " + idActividad));
+    }
+
 }

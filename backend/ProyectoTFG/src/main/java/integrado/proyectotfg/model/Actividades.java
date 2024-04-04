@@ -38,6 +38,10 @@ public class Actividades {
     @JoinColumn(name = "tipo_actividad_id")
     private TipoActividad tipoActividad;
 
+    @OneToMany(mappedBy = "actividad", cascade = CascadeType.ALL)
+    private Set<SolicitudesActividades> solicitudesActividades = new HashSet<>();
+
+
     public Actividades() {
     }
 
@@ -111,5 +115,13 @@ public class Actividades {
 
     public void setTipoActividad(TipoActividad tipoActividad) {
         this.tipoActividad = tipoActividad;
+    }
+
+    public Set<SolicitudesActividades> getSolicitudesActividades() {
+        return solicitudesActividades;
+    }
+
+    public void setSolicitudesActividades(Set<SolicitudesActividades> solicitudesActividades) {
+        this.solicitudesActividades = solicitudesActividades;
     }
 }

@@ -12,4 +12,6 @@ public interface ActividadesServices {
     List<Actividades> buscarActividadesPorNombre(String busqueda);
 
     Actividades guardarActividad(Actividades actividad);
+
+    Actividades obtenerActividadPorId(Long idActividad);
 }
