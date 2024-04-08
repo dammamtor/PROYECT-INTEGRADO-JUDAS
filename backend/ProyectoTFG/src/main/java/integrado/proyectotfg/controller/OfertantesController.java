@@ -65,8 +65,7 @@ public class OfertantesController {
     @PostMapping("/ofertantes/{ofertanteId}/actividades")
     public ResponseEntity<Actividades> crearActividadParaOfertante(
             @PathVariable Long ofertanteId,
-            @RequestBody ActividadesRequestDTO actividadDTO)
-    {
+            @RequestBody ActividadesRequestDTO actividadDTO) {
         Ofertantes ofertante = ofertantesService.obtenerOfertantePorId(ofertanteId);
         if (ofertante == null) {
             return ResponseEntity.notFound().build();

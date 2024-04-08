@@ -67,6 +67,7 @@ public class OfertantesServicesImpl implements OfertantesServices {
         repository.delete(ofertante);
     }
 
+
     @Override
     public void eliminarActividadOfertante(Long ofertanteId, Long actividadId) {
         Ofertantes ofertante = repository.findById(ofertanteId)

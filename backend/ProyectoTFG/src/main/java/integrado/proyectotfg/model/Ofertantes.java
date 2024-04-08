@@ -29,9 +29,6 @@ public class Ofertantes {
     @OneToMany(mappedBy = "ofertante", cascade = CascadeType.ALL)
     private Set<Actividades> actividades;
 
-    @OneToMany(mappedBy = "ofertante", cascade = CascadeType.ALL)
-    private Set<SolicitudesOfertantes> solicitudesOfertantes;
-
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "ofertantes_consumidores",
             joinColumns = {@JoinColumn(name = "idOfertantes")},
@@ -103,14 +100,6 @@ public class Ofertantes {
 
     public void setActividades(Set<Actividades> actividades) {
         this.actividades = actividades;
-    }
-
-    public Set<SolicitudesOfertantes> getSolicitudesOfertantes() {
-        return solicitudesOfertantes;
-    }
-
-    public void setSolicitudesOfertantes(Set<SolicitudesOfertantes> solicitudesOfertantes) {
-        this.solicitudesOfertantes = solicitudesOfertantes;
     }
 
     public Set<Consumidores> getConsumidor() {

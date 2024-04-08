@@ -39,6 +39,7 @@ public class Actividades {
     private TipoActividad tipoActividad;
 
     @OneToMany(mappedBy = "actividad", cascade = CascadeType.ALL)
+    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
     private Set<SolicitudesActividades> solicitudesActividades = new HashSet<>();
 
 

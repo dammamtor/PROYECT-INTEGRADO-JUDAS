@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class SolicitudesActividadesServicesImpl implements SolicitudesActividadesServices{
@@ -19,7 +20,28 @@ public class SolicitudesActividadesServicesImpl implements SolicitudesActividade
         // Establecer la fecha de la solicitud como la fecha actual
         solicitud.setFec_solictitud(new Date());
 
-        // Guardar la solicitud en la base de datos
-        return repository.save(solicitud);
+        // Guardar la solicitud de actividad en la base de datos
+        SolicitudesActividades solicitudGuardada = repository.save(solicitud);
+
+        return solicitudGuardada;
+    }
+
+    @Override
+    public SolicitudesActividades obtenerSolicitudActividadPorId(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No existe esa solicitud del consumidor con el ID: " + id));
+    }
+
+    @Override
+    public void eliminarSolicitudActividad(Long id) {
+        SolicitudesActividades solicitudActividad = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No existe esa solicitud del consumidor con el ID: " + id));
+
+        repository.delete(solicitudActividad);
+    }
+
+    @Override
+    public List<SolicitudesActividades> obtenerSolicitudesActividadesPorConsumidor(Long idConsumidor) {
+        return repository.findByConsumidorId(idConsumidor);
     }
 }

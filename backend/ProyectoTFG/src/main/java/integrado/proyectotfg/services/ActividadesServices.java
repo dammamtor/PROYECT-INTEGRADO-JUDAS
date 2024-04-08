@@ -14,4 +14,6 @@ public interface ActividadesServices {
     Actividades guardarActividad(Actividades actividad);
 
     Actividades obtenerActividadPorId(Long idActividad);
+    void eliminarActividad(Long id);
+
 }

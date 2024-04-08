@@ -1,5 +1,6 @@
 package integrado.proyectotfg.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -29,7 +30,9 @@ public class Consumidores {
     private Set<Notificaciones> notificaciones = new HashSet<>();
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
     private Set<Reseñas> reseñas = new HashSet<>();
+
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
+    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
     private Set<SolicitudesActividades> solicitudesActividades = new HashSet<>();
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
     private Set<HistorialActividades> historialActividades = new HashSet<>();
@@ -136,4 +139,5 @@ public class Consumidores {
     public void setOfertantes(Set<Ofertantes> ofertantes) {
         this.ofertantes = ofertantes;
     }
+
 }

@@ -7,6 +7,7 @@ import integrado.proyectotfg.services.ActividadesServicesImpl;
 import integrado.proyectotfg.services.ConsumidoresServicesImpl;
 import integrado.proyectotfg.services.SolicitudesActividadesServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,6 +61,19 @@ public class ConsumidoresController {
         respuesta.put("eliminar", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
     }
+    @GetMapping("/consumidores/{idConsumidor}/solicitudes-actividades")
+    public ResponseEntity<List<SolicitudesActividades>> obtenerSolicitudesActividadesPorConsumidor(
+            @PathVariable Long idConsumidor) {
+
+        // Obtener todas las solicitudes de actividades del consumidor por su ID
+        List<SolicitudesActividades> solicitudesActividades = solicitudesActividadesServices.obtenerSolicitudesActividadesPorConsumidor(idConsumidor);
+
+        if (solicitudesActividades.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(solicitudesActividades);
+    }
 
     @PostMapping("/consumidores/{idConsumidor}/solicitudes-actividades/{idActividad}")
     public ResponseEntity<SolicitudesActividades> enviarSolicitudActividad(
@@ -87,6 +101,29 @@ public class ConsumidoresController {
         SolicitudesActividades nuevaSolicitud = solicitudesActividadesServices.guardarSolicitudActividad(solicitudActividad);
 
         return ResponseEntity.ok(nuevaSolicitud);
+    }
+    @DeleteMapping("/consumidores/{idConsumidor}/solicitudes-actividades/{idSolicitud}")
+    public ResponseEntity<Map<String, Boolean>> cancelarSolicitudActividad(
+            @PathVariable Long idConsumidor,
+            @PathVariable Long idSolicitud) {
+
+        // Obtener la solicitud de actividad por su ID
+        SolicitudesActividades solicitud = solicitudesActividadesServices.obtenerSolicitudActividadPorId(idSolicitud);
+        if (solicitud == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Verificar que la solicitud pertenece al consumidor
+        if (!solicitud.getConsumidor().getId().equals(idConsumidor)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        // Eliminar la solicitud de actividad
+        solicitudesActividadesServices.eliminarSolicitudActividad(idSolicitud);
+
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("cancelado", Boolean.TRUE);
+        return ResponseEntity.ok(respuesta);
     }
 
 }

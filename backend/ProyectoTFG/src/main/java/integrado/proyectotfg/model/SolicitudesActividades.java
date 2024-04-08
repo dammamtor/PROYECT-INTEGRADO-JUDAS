@@ -1,5 +1,6 @@
 package integrado.proyectotfg.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -23,6 +24,10 @@ public class SolicitudesActividades {
     @ManyToOne
     @JoinColumn(name = "id_actividad")
     private Actividades actividad;
+
+    @ManyToOne
+    @JoinColumn(name = "id_ofertantes")
+    private Ofertantes ofertante;
 
     public SolicitudesActividades() {
     }
@@ -65,5 +70,13 @@ public class SolicitudesActividades {
 
     public void setActividad(Actividades actividad) {
         this.actividad = actividad;
+    }
+
+    public Ofertantes getOfertante() {
+        return ofertante;
+    }
+
+    public void setOfertante(Ofertantes ofertante) {
+        this.ofertante = ofertante;
     }
 }
