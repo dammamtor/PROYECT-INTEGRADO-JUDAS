@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface SolicitudesActividadesRepository extends JpaRepository<SolicitudesActividades, Long> {
     List<SolicitudesActividades> findByConsumidorId(Long idConsumidor);
+
+    List<SolicitudesActividades> findByOfertanteId(Long idOfertante);
 }

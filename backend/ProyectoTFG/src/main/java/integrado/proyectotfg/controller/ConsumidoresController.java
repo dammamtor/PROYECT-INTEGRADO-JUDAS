@@ -2,11 +2,11 @@ package integrado.proyectotfg.controller;
 
 import integrado.proyectotfg.model.Actividades;
 import integrado.proyectotfg.model.Consumidores;
+import integrado.proyectotfg.model.Reseñas;
 import integrado.proyectotfg.model.SolicitudesActividades;
-import integrado.proyectotfg.services.ActividadesServicesImpl;
-import integrado.proyectotfg.services.ConsumidoresServicesImpl;
-import integrado.proyectotfg.services.SolicitudesActividadesServicesImpl;
+import integrado.proyectotfg.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -28,6 +29,9 @@ public class ConsumidoresController {
     @Autowired
     ActividadesServicesImpl actividadesServices;
 
+    @Autowired
+    ReseñasServicesImpl reseñasServices;
+
     @GetMapping("/consumidores")
     public List<Consumidores> listarConsumidores() {
         return consumidoresServices.listarConsumidores();
@@ -39,7 +43,7 @@ public class ConsumidoresController {
     }
 
     @GetMapping("/consumidores/{id}")
-    public ResponseEntity<Consumidores> obtenerConsumidorPorId(@PathVariable Long id){
+    public ResponseEntity<Consumidores> obtenerConsumidorPorId(@PathVariable Long id) {
         Consumidores consumidor = consumidoresServices.obtenerConsumidorPorId(id);
         return ResponseEntity.ok(consumidor);
     }
@@ -61,6 +65,8 @@ public class ConsumidoresController {
         respuesta.put("eliminar", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
     }
+
+    //METODOS DE SOLICITUDES POR PARTE DEL CONSUMIDOR
     @GetMapping("/consumidores/{idConsumidor}/solicitudes-actividades")
     public ResponseEntity<List<SolicitudesActividades>> obtenerSolicitudesActividadesPorConsumidor(
             @PathVariable Long idConsumidor) {
@@ -96,12 +102,14 @@ public class ConsumidoresController {
         SolicitudesActividades solicitudActividad = new SolicitudesActividades();
         solicitudActividad.setActividad(actividad);
         solicitudActividad.setConsumidor(consumidor);
+        solicitudActividad.setOfertante(actividad.getOfertante());
 
         // Guardar la solicitud de actividad en la base de datos
         SolicitudesActividades nuevaSolicitud = solicitudesActividadesServices.guardarSolicitudActividad(solicitudActividad);
 
         return ResponseEntity.ok(nuevaSolicitud);
     }
+
     @DeleteMapping("/consumidores/{idConsumidor}/solicitudes-actividades/{idSolicitud}")
     public ResponseEntity<Map<String, Boolean>> cancelarSolicitudActividad(
             @PathVariable Long idConsumidor,
@@ -124,6 +132,42 @@ public class ConsumidoresController {
         Map<String, Boolean> respuesta = new HashMap<>();
         respuesta.put("cancelado", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
+    }
+
+    //METODOS DE RESEÑAS
+    @PostMapping("/consumidores/{idConsumidor}/opinion-actividades/{idActividad}")
+    public ResponseEntity<Reseñas> publicarReview(
+            @PathVariable Long idConsumidor,
+            @PathVariable Long idActividad,
+            @RequestBody Reseñas reviewSend) {
+
+        // Obtener el consumidor y la actividad por sus IDs
+        Consumidores consumidor = consumidoresServices.obtenerConsumidorPorId(idConsumidor);
+        Actividades actividad = actividadesServices.obtenerActividadPorId(idActividad);
+
+        if (consumidor == null || actividad == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Establecer las relaciones
+        reviewSend.setConsumidor(consumidor);
+        reviewSend.setActividad(actividad);
+
+        // Guardar la reseña en la base de datos
+        Reseñas nuevaReseña = reseñasServices.crearReseña(reviewSend);
+
+        return ResponseEntity.ok(nuevaReseña);
+    }
+    @GetMapping("/consumidores/{idConsumidor}/opinion-actividades")
+    public ResponseEntity<List<Reseñas>> obtenerReseñaPorIDconsumidor(
+            @PathVariable Long idConsumidor)
+    {
+        List<Reseñas> listaOpiniones = reseñasServices.obtenerReseñaPorIDconsumidor(idConsumidor);
+        if (listaOpiniones.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(listaOpiniones);
     }
 
 }

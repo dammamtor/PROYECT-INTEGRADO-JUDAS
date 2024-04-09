@@ -22,6 +22,10 @@ public class Reseñas {
     @JoinColumn(name = "id_consumidores")
     private Consumidores consumidor;
 
+    @ManyToOne
+    @JoinColumn(name = "id_actividades")
+    private Actividades actividad;
+
     public Reseñas() {
     }
 
@@ -63,5 +67,13 @@ public class Reseñas {
 
     public void setConsumidor(Consumidores consumidor) {
         this.consumidor = consumidor;
+    }
+
+    public Actividades getActividad() {
+        return actividad;
+    }
+
+    public void setActividad(Actividades actividad) {
+        this.actividad = actividad;
     }
 }

@@ -1,12 +1,12 @@
 package integrado.proyectotfg.controller;
 
-import integrado.proyectotfg.model.Actividades;
+import integrado.proyectotfg.model.*;
 import integrado.proyectotfg.model.DTO.ActividadesRequestDTO;
-import integrado.proyectotfg.model.Ofertantes;
-import integrado.proyectotfg.model.TipoActividad;
 import integrado.proyectotfg.repository.TipoActividadRepository;
 import integrado.proyectotfg.services.ActividadesServicesImpl;
 import integrado.proyectotfg.services.OfertantesServicesImpl;
+import integrado.proyectotfg.services.ReseñasServicesImpl;
+import integrado.proyectotfg.services.SolicitudesActividadesServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +28,11 @@ public class OfertantesController {
 
     @Autowired
     private TipoActividadRepository tipoActividadRepository;
+
+    @Autowired
+    SolicitudesActividadesServicesImpl solicitudesActividadesServices;
+    @Autowired
+    ReseñasServicesImpl reseñasServices;
 
 
     @GetMapping("/ofertantes")
@@ -109,4 +114,56 @@ public class OfertantesController {
         }
     }
 
+    //METODOS SOBRE SOLICITUDES DEL LADO DEL OFERTANTE
+    @GetMapping("/ofertantes/{ofertanteId}/solicitudes-actividades")
+    public ResponseEntity<List<SolicitudesActividades>> obtenerSolicitudesActividadesPorOfertante(
+            @PathVariable Long ofertanteId) {
+        // Obtener todas las solicitudes de actividades para el ofertante por su ID
+        List<SolicitudesActividades> solicitudesActividades = solicitudesActividadesServices.obtenerSolicitudesActividadesPorOfertante(ofertanteId);
+
+        if (solicitudesActividades.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(solicitudesActividades);
+    }
+
+    @PutMapping("/ofertantes/{ofertanteId}/solicitudes-actividades/{idSolicitud}")
+    public ResponseEntity<Map<String, Boolean>> aceptarSolicitudPorId(
+            @PathVariable Long ofertanteId,
+            @PathVariable Long idSolicitud
+    ) {
+        //Obtener el ofertante (no vaya a ser que metas uno que no existe)
+        Ofertantes ofertante1 = ofertantesService.obtenerOfertantePorId(ofertanteId);
+        if (ofertante1 == null) {
+            return ResponseEntity.notFound().build();
+        }
+        //Obtener la solicitud de actividad
+        SolicitudesActividades solicitudPendiente = solicitudesActividadesServices.obtenerSolicitudActividadPorId(idSolicitud);
+        if (solicitudPendiente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        //Validamos la solicitud
+        solicitudesActividadesServices.validarSolicitudActividad(solicitudPendiente);
+
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("aceptado", Boolean.TRUE);
+
+        return ResponseEntity.ok(respuesta);
+
+    }
+
+    //METODOS RESEÑAS
+    @GetMapping("/ofertantes/{ofertanteId}/opinion-actividades")
+    public ResponseEntity<List<Reseñas>> obtenerReseñaPorIDofertantes(
+            @PathVariable Long ofertanteId)
+    {
+        List<Reseñas> listaOpiniones = reseñasServices.listaReseñas(ofertanteId);
+        if (listaOpiniones.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(listaOpiniones);
+    }
 }

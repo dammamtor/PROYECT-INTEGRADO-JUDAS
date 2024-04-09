@@ -41,7 +41,23 @@ public class SolicitudesActividadesServicesImpl implements SolicitudesActividade
     }
 
     @Override
+    public SolicitudesActividades validarSolicitudActividad(SolicitudesActividades solicitudesActividades) {
+        SolicitudesActividades solicitudValidar = repository.findById(solicitudesActividades.getId())
+                .orElseThrow(() -> new RuntimeException("No se encontró una solicitud de actividad con el ID: " + solicitudesActividades.getId()));
+
+        //ACTUALIZAR LOS DETALLES
+        solicitudValidar.setEstado("Aceptado");
+
+        return repository.save(solicitudValidar);
+    }
+
+    @Override
     public List<SolicitudesActividades> obtenerSolicitudesActividadesPorConsumidor(Long idConsumidor) {
         return repository.findByConsumidorId(idConsumidor);
+    }
+
+    @Override
+    public List<SolicitudesActividades> obtenerSolicitudesActividadesPorOfertante(Long idOfertante) {
+        return repository.findByOfertanteId(idOfertante);
     }
 }

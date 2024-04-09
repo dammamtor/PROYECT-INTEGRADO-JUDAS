@@ -42,6 +42,10 @@ public class Actividades {
     @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
     private Set<SolicitudesActividades> solicitudesActividades = new HashSet<>();
 
+    @OneToMany(mappedBy = "actividad", cascade = CascadeType.ALL)
+    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
+    private Set<Reseñas> reseñas = new HashSet<>();
+
 
     public Actividades() {
     }
@@ -124,5 +128,13 @@ public class Actividades {
 
     public void setSolicitudesActividades(Set<SolicitudesActividades> solicitudesActividades) {
         this.solicitudesActividades = solicitudesActividades;
+    }
+
+    public Set<Reseñas> getReseñas() {
+        return reseñas;
+    }
+
+    public void setReseñas(Set<Reseñas> reseñas) {
+        this.reseñas = reseñas;
     }
 }

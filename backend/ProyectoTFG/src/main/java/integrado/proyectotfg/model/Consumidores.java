@@ -29,6 +29,7 @@ public class Consumidores {
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
     private Set<Notificaciones> notificaciones = new HashSet<>();
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
+    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
     private Set<Reseñas> reseñas = new HashSet<>();
 
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
