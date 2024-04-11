@@ -35,6 +35,11 @@ public class Ofertantes {
             inverseJoinColumns = {@JoinColumn(name = "idConsumidores")})
     private Set<Consumidores> consumidor = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Usuario usuario;
+
+
     public Ofertantes() {
     }
 
@@ -108,5 +113,13 @@ public class Ofertantes {
 
     public void setConsumidor(Set<Consumidores> consumidor) {
         this.consumidor = consumidor;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

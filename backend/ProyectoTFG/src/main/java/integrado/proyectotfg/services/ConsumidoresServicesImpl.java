@@ -1,6 +1,7 @@
 package integrado.proyectotfg.services;
 
 import integrado.proyectotfg.model.Consumidores;
+import integrado.proyectotfg.model.Usuario;
 import integrado.proyectotfg.repository.ConsumidoresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,5 +57,11 @@ public class ConsumidoresServicesImpl implements ConsumidoresServices{
                 .orElseThrow(() -> new RuntimeException("No existe un consumidor con el ID: " + id));
 
         consumidoresRepository.delete(consumidores);
+    }
+
+    @Override
+    public Consumidores obtenerConsumidorPorUsuario(Usuario usuario) {
+        return consumidoresRepository.findByUsuario(usuario);
+
     }
 }

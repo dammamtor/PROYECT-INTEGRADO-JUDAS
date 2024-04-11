@@ -40,6 +40,9 @@ public class Consumidores {
     @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "consumidor")
     private Set<Ofertantes> ofertantes = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Usuario usuario;
 
     public Consumidores() {
     }
@@ -141,4 +144,11 @@ public class Consumidores {
         this.ofertantes = ofertantes;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

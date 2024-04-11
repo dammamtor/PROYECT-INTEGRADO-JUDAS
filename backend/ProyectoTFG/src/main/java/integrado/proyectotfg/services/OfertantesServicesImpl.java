@@ -2,6 +2,7 @@ package integrado.proyectotfg.services;
 
 import integrado.proyectotfg.model.Actividades;
 import integrado.proyectotfg.model.Ofertantes;
+import integrado.proyectotfg.model.Usuario;
 import integrado.proyectotfg.repository.ActividadesRepository;
 import integrado.proyectotfg.repository.OfertantesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,10 @@ public class OfertantesServicesImpl implements OfertantesServices {
 
         // Eliminar la actividad
         actividadesRepository.delete(actividad);
+    }
+
+    @Override
+    public Ofertantes obtenerOfertantePorUsuario(Usuario usuario) {
+        return repository.findByUsuario(usuario);
     }
 }

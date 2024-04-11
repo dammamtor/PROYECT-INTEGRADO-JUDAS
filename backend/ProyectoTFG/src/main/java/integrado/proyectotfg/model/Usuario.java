@@ -30,8 +30,12 @@ public class Usuario implements Serializable {
 
     @Column(nullable = false)
     private String role;
-    @Column(nullable = false, columnDefinition = "BOOLEAN")
-    private boolean activo;
+    @Column(unique = true, length = 9, nullable = false)
+    private String nif;
+    @Column(nullable = false)
+    private String telefono;
+    @Column(nullable = false)
+    private String direccion;
 
     public Usuario() {
     }
@@ -92,12 +96,28 @@ public class Usuario implements Serializable {
         this.role = role;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public String getNif() {
+        return nif;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setNif(String nif) {
+        this.nif = nif;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }
 
