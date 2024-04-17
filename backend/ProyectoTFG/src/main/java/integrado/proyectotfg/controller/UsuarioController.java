@@ -50,8 +50,8 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioGuardado);
     }
 
-    @PostMapping("/usuarios/convertir-ofertante")
-    public ResponseEntity<String> convertirAOfertante(
+    @PostMapping("/usuarios/iniciar-sesion")
+    public ResponseEntity<String> iniciarSesion(
             @RequestParam String email,
             @RequestParam String password
     ) {
@@ -64,30 +64,60 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
         }
 
-        // Verificar si ya existe un ofertante asociado a este usuario
-        Ofertantes ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuario);
-        if (ofertante == null) {
-            ofertante = new Ofertantes();
-            ofertante.setUsuario(usuario);
-            ofertante.setNombre(usuario.getNombre());
-            ofertante.setApellidos(usuario.getApellidos());
-            ofertante.setNif(usuario.getNif()); // Suponiendo que el Consumidor también tiene estos campos
-            ofertante.setTelefono(usuario.getTelefono());
-            ofertante.setCorreo(usuario.getEmail()); // O utilizar el correo del usuario
-            ofertante.setDireccion(usuario.getDireccion());
+        // Preguntar al usuario qué tipo de sesión desea iniciar
+        return ResponseEntity.ok("Seleccione el tipo de sesión que desea iniciar:\n" +
+                "1. Iniciar sesión como Consumidor\n" +
+                "2. Iniciar sesión como Ofertante");
+    }
 
-            ofertantesServices.guardarOfertante(ofertante);
-
-            return ResponseEntity.ok("Rol cambiado exitosamente a ofertante y se ha creado un nuevo ofertante asociado");
+    @PostMapping("/usuarios/convertir-ofertante")
+    public ResponseEntity<String> convertirAOfertante(
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam String tipoSesion // Nuevo parámetro para determinar el tipo de sesión
+    ) {
+        Usuario usuario = usuarioServices.obtenerUsuarioPorEmail(email);
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario no encontrado");
         }
 
-        // Cambiar el rol del usuario a ofertante
-        usuario.setRole("PROVIDER");
-        usuarioServices.guardarUsuario(usuario);
+        if (!usuario.getPassword().equals(password)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
+        }
 
-        // Retornar una respuesta exitosa
-        return ResponseEntity.ok("Rol cambiado exitosamente a ofertante");
+        if (tipoSesion.equals("1")) {
+            // Realizar acciones relacionadas con el inicio de sesión como Consumidor
+            // Puedes implementar esta lógica según tus requisitos
+            return ResponseEntity.ok("Iniciaste sesión como Consumidor");
+        } else if (tipoSesion.equals("2")) {
+            // Verificar si ya existe un ofertante asociado a este usuario
+            Ofertantes ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuario);
+            if (ofertante == null) {
+                ofertante = new Ofertantes();
+                ofertante.setUsuario(usuario);
+                ofertante.setNombre(usuario.getNombre());
+                ofertante.setApellidos(usuario.getApellidos());
+                ofertante.setNif(usuario.getNif()); // Suponiendo que el Consumidor también tiene estos campos
+                ofertante.setTelefono(usuario.getTelefono());
+                ofertante.setCorreo(usuario.getEmail()); // O utilizar el correo del usuario
+                ofertante.setDireccion(usuario.getDireccion());
+
+                ofertantesServices.guardarOfertante(ofertante);
+
+                return ResponseEntity.ok("Rol cambiado exitosamente a ofertante y se ha creado un nuevo ofertante asociado");
+            }
+
+            // Cambiar el rol del usuario a ofertante
+            usuario.setRole("PROVIDER");
+            usuarioServices.guardarUsuario(usuario);
+
+            // Retornar una respuesta exitosa
+            return ResponseEntity.ok("Rol cambiado exitosamente a ofertante");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tipo de sesión inválido");
+        }
     }
+
 
     @DeleteMapping("/usuarios/{id}")
     public ResponseEntity<Map<String, Boolean>> eliminarUsuario(@PathVariable Long id) {
