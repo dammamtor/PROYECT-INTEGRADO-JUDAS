@@ -28,7 +28,7 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private String apellidos;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String role;
     @Column(unique = true, length = 9, nullable = false)
     private String nif;

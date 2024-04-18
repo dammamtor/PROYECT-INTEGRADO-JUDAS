@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,6 +27,16 @@ public class UsuarioController {
 
     @Autowired
     OfertantesServicesImpl ofertantesServices;
+
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<Usuario>> listarUsuarios() {
+        List<Usuario> usuarios = usuarioServices.obtenerTodosLosUsuarios();
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(usuarios);
+    }
+
 
     @PostMapping("/usuarios")
     public ResponseEntity<Usuario> registrarUsuarioYConsumidor(

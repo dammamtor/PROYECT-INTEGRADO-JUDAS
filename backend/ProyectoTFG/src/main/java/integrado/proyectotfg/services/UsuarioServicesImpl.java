@@ -5,6 +5,8 @@ import integrado.proyectotfg.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioServicesImpl implements UsuarioServices {
     @Autowired
@@ -36,5 +38,10 @@ public class UsuarioServicesImpl implements UsuarioServices {
     public Usuario obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No se encontró un usuario con el ID: " + id));
+    }
+
+    @Override
+    public List<Usuario> obtenerTodosLosUsuarios() {
+        return usuarioRepository.findAll();
     }
 }

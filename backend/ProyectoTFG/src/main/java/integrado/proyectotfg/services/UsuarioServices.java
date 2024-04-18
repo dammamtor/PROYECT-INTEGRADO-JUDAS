@@ -2,6 +2,8 @@ package integrado.proyectotfg.services;
 
 import integrado.proyectotfg.model.Usuario;
 
+import java.util.List;
+
 public interface UsuarioServices {
     Usuario guardarUsuario (Usuario usario);
 
@@ -10,4 +12,6 @@ public interface UsuarioServices {
     void eliminarUsuario(Long id);
 
     Usuario obtenerUsuarioPorId(Long id);
+
+    List<Usuario> obtenerTodosLosUsuarios();
 }
