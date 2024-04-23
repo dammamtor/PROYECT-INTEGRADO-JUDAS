@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1>BIENVENIDO {{ usuario }}</h1>
+            <h2>Iniciaste sesión como consumidor</h2>
+            <h3>Este es tu home, aquí abajo puedes ver tus datos:</h3>
+            <div class="card">
+                <div class="card-body">
+                    @if (consumidor) {
+                    <p><strong>ID:</strong> {{ consumidor.id }}</p>
+                    <p><strong>Nombre:</strong> {{ consumidor.nombre }}</p>
+                    <p><strong>Apellidos:</strong> {{ consumidor.apellidos }}</p>
+                    <p><strong>NIF:</strong> {{ consumidor.nif }}</p>
+                    <p><strong>Teléfono:</strong> {{ consumidor.telefono }}</p>
+                    <p><strong>Correo:</strong> {{ consumidor.correo }}</p>
+                    <p><strong>Dirección:</strong> {{ consumidor.direccion }}</p>
+                    }
+                    @else {
+                    <p>No se encontraron datos del consumidor.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

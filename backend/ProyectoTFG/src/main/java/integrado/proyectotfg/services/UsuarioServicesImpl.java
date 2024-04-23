@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServicesImpl implements UsuarioServices {
@@ -13,13 +14,28 @@ public class UsuarioServicesImpl implements UsuarioServices {
     UsuarioRepository usuarioRepository;
 
     @Override
-    public Usuario guardarUsuario(Usuario usario) {
-        Usuario usuarioLocal = usuarioRepository.findByUserName(usario.getUserName());
-        if (usuarioLocal != null) {
+    public Usuario guardarUsuario(Usuario usuario) {
+        Optional<Usuario> usuarioExistenteOptional = usuarioRepository.findByUserName(usuario.getUserName());
+        if (usuarioExistenteOptional.isPresent()) {
             throw new IllegalArgumentException("Ya existe ese usuario.");
         }
-        return usuarioRepository.save(usario);
+        return usuarioRepository.save(usuario);
     }
+
+
+    @Override
+    public Usuario actualizarUsuario(Usuario usuario) {
+        // Verificar si el usuario existe en la base de datos
+        Optional<Usuario> usuarioExistenteOptional = usuarioRepository.findByUserName(usuario.getUserName());
+        if (usuarioExistenteOptional.isEmpty()) {
+            throw new IllegalArgumentException("El usuario no existe.");
+        }
+        Usuario usuarioExistente = usuarioExistenteOptional.get();
+        usuarioExistente.setRole(usuario.getRole());
+        // Guardar los cambios en el usuario
+        return usuarioRepository.save(usuarioExistente);
+    }
+
 
     @Override
     public Usuario obtenerUsuarioPorEmail(String email) {
@@ -43,5 +59,11 @@ public class UsuarioServicesImpl implements UsuarioServices {
     @Override
     public List<Usuario> obtenerTodosLosUsuarios() {
         return usuarioRepository.findAll();
+    }
+
+    @Override
+    public Usuario obtenerUsuarioPorUsername(String userName) {
+        return usuarioRepository.findByUserName(userName)
+                .orElseThrow(() -> new RuntimeException("No se encontró un usuario con el nombre de usuario: " + userName));
     }
 }

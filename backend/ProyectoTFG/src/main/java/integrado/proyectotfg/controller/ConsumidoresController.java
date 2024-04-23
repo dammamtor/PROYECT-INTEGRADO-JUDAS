@@ -1,9 +1,6 @@
 package integrado.proyectotfg.controller;
 
-import integrado.proyectotfg.model.Actividades;
-import integrado.proyectotfg.model.Consumidores;
-import integrado.proyectotfg.model.Reseñas;
-import integrado.proyectotfg.model.SolicitudesActividades;
+import integrado.proyectotfg.model.*;
 import integrado.proyectotfg.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,6 +28,8 @@ public class ConsumidoresController {
 
     @Autowired
     ReseñasServicesImpl reseñasServices;
+    @Autowired
+    private UsuarioServicesImpl usuarioServicesImpl;
 
     @GetMapping("/consumidores")
     public List<Consumidores> listarConsumidores() {
@@ -45,6 +44,13 @@ public class ConsumidoresController {
     @GetMapping("/consumidores/{id}")
     public ResponseEntity<Consumidores> obtenerConsumidorPorId(@PathVariable Long id) {
         Consumidores consumidor = consumidoresServices.obtenerConsumidorPorId(id);
+        return ResponseEntity.ok(consumidor);
+    }
+
+    @GetMapping("/consumidores/usuario/{user}")
+    public ResponseEntity<Consumidores> obtenerConsumidorPorUsername(@PathVariable String user) {
+        Usuario usuario = usuarioServicesImpl.obtenerUsuarioPorUsername(user);
+        Consumidores consumidor = consumidoresServices.obtenerConsumidorPorUsuario(usuario);
         return ResponseEntity.ok(consumidor);
     }
 

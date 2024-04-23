@@ -41,7 +41,7 @@ public class UsuarioController {
     @PostMapping("/usuarios")
     public ResponseEntity<Usuario> registrarUsuarioYConsumidor(
             @RequestBody Usuario usuarioSave
-    ){
+    ) {
         usuarioSave.setRole("CONSUMER");
 
         // Guardar el usuario en la base de datos
@@ -63,43 +63,23 @@ public class UsuarioController {
 
     @PostMapping("/usuarios/iniciar-sesion")
     public ResponseEntity<String> iniciarSesion(
-            @RequestParam String email,
-            @RequestParam String password
-    ) {
-        Usuario usuario = usuarioServices.obtenerUsuarioPorEmail(email);
-        if (usuario == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario no encontrado");
-        }
-
-        if (!usuario.getPassword().equals(password)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
-        }
-
-        // Preguntar al usuario qué tipo de sesión desea iniciar
-        return ResponseEntity.ok("Seleccione el tipo de sesión que desea iniciar:\n" +
-                "1. Iniciar sesión como Consumidor\n" +
-                "2. Iniciar sesión como Ofertante");
-    }
-
-    @PostMapping("/usuarios/convertir-ofertante")
-    public ResponseEntity<String> convertirAOfertante(
-            @RequestParam String email,
+            @RequestParam String user,
             @RequestParam String password,
             @RequestParam String tipoSesion // Nuevo parámetro para determinar el tipo de sesión
     ) {
-        Usuario usuario = usuarioServices.obtenerUsuarioPorEmail(email);
+        Usuario usuario = usuarioServices.obtenerUsuarioPorUsername(user);
         if (usuario == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario no encontrado");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\": \"Usuario no encontrado\"}");
         }
 
         if (!usuario.getPassword().equals(password)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Contraseña incorrecta\"}");
         }
 
         if (tipoSesion.equals("1")) {
-            // Realizar acciones relacionadas con el inicio de sesión como Consumidor
-            // Puedes implementar esta lógica según tus requisitos
-            return ResponseEntity.ok("Iniciaste sesión como Consumidor");
+            usuario.setRole("CONSUMER");
+            usuarioServices.actualizarUsuario(usuario);
+            return ResponseEntity.ok().body("{\"mensaje\": \"Iniciaste sesión como Consumidor\"}");
         } else if (tipoSesion.equals("2")) {
             // Verificar si ya existe un ofertante asociado a este usuario
             Ofertantes ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuario);
@@ -115,17 +95,17 @@ public class UsuarioController {
 
                 ofertantesServices.guardarOfertante(ofertante);
 
-                return ResponseEntity.ok("Rol cambiado exitosamente a ofertante y se ha creado un nuevo ofertante asociado");
+                return ResponseEntity.ok("{\"mensaje\": \"Rol cambiado exitosamente a ofertante y se ha creado un nuevo ofertante asociado\"}");
             }
 
             // Cambiar el rol del usuario a ofertante
             usuario.setRole("PROVIDER");
-            usuarioServices.guardarUsuario(usuario);
+            usuarioServices.actualizarUsuario(usuario);
 
             // Retornar una respuesta exitosa
-            return ResponseEntity.ok("Rol cambiado exitosamente a ofertante");
+            return ResponseEntity.ok("{\"mensaje\": \"Rol cambiado exitosamente a ofertante\"}");
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tipo de sesión inválido");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\": \"Tipo de sesión inválido\"}");
         }
     }
 

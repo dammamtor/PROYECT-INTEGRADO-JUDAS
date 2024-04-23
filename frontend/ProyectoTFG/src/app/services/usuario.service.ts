@@ -9,6 +9,8 @@ import { environment } from '../../environments/environment';
 })
 export class UsuarioService {
   private url: string = "http://localhost:8080/api/v1/usuarios"
+  usuario: string | null = null;
+
   constructor(private http: HttpClient) {
   }
 
@@ -20,5 +22,14 @@ export class UsuarioService {
   addUsuario(usuario: Usuarios): Observable<Object> {
     console.log("USUARIO PARA AGREGAR: ", usuario);
     return this.http.post(this.url, usuario);
+  }
+
+  iniciarSesion(user: string, password: string, tipoSesion: string): Observable<any> {
+    console.log("user: " + user + ", password: " + password + " ,tipoSesion: " + tipoSesion);
+    const body = new FormData();
+    body.append('user', user);
+    body.append('password', password);
+    body.append('tipoSesion', tipoSesion); 
+    return this.http.post<any>(`${this.url}/iniciar-sesion`, body);
   }
 }
