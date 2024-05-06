@@ -2,6 +2,8 @@ package integrado.proyectotfg.controller;
 
 import integrado.proyectotfg.model.*;
 import integrado.proyectotfg.services.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ import java.util.Date;
 @RequestMapping("/api/v1/")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ConsumidoresController {
+    static final Logger logger = LoggerFactory.getLogger(ConsumidoresController.class);
+
     @Autowired
     ConsumidoresServicesImpl consumidoresServices;
 
@@ -50,7 +54,9 @@ public class ConsumidoresController {
     @GetMapping("/consumidores/usuario/{user}")
     public ResponseEntity<Consumidores> obtenerConsumidorPorUsername(@PathVariable String user) {
         Usuario usuario = usuarioServicesImpl.obtenerUsuarioPorUsername(user);
+        logger.info("Usuario: " + usuario);
         Consumidores consumidor = consumidoresServices.obtenerConsumidorPorUsuario(usuario);
+        logger.info("Consumidor: " + consumidor);
         return ResponseEntity.ok(consumidor);
     }
 

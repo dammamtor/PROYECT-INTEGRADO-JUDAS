@@ -1,8 +1,11 @@
 package integrado.proyectotfg.services;
 
+import integrado.proyectotfg.controller.ConsumidoresController;
 import integrado.proyectotfg.model.Consumidores;
 import integrado.proyectotfg.model.Usuario;
 import integrado.proyectotfg.repository.ConsumidoresRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,8 @@ import java.util.List;
 
 @Service
 public class ConsumidoresServicesImpl implements ConsumidoresServices{
+    static final Logger logger = LoggerFactory.getLogger(ConsumidoresServicesImpl.class);
+
     @Autowired
     ConsumidoresRepository consumidoresRepository;
 
@@ -61,7 +66,16 @@ public class ConsumidoresServicesImpl implements ConsumidoresServices{
 
     @Override
     public Consumidores obtenerConsumidorPorUsuario(Usuario usuario) {
-        return consumidoresRepository.findByUsuario(usuario);
+        logger.info("Usuario en consumidores services impl: " + usuario);
+        Consumidores consumidor = consumidoresRepository.findByUsuario(usuario);
+        logger.info("Consumidor devuelto: " + consumidor);
 
+        if (consumidor == null) {
+            throw new RuntimeException("No se encontró un consumidor asociado al usuario proporcionado");
+        }
+
+        return consumidor;
     }
+
+
 }

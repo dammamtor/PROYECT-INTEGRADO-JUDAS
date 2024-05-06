@@ -37,6 +37,9 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private String direccion;
 
+    @OneToOne(mappedBy = "usuario")
+    private Consumidores consumidor;
+
     public Usuario() {
     }
 
@@ -118,6 +121,30 @@ public class Usuario implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Consumidores getConsumidor() {
+        return consumidor;
+    }
+
+    public void setConsumidor(Consumidores consumidor) {
+        this.consumidor = consumidor;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", role='" + role + '\'' +
+                ", nif='" + nif + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", direccion='" + direccion + '\'' +
+                '}';
     }
 }
 
