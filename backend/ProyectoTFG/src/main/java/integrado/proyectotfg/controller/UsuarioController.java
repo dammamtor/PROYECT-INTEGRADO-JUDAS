@@ -55,11 +55,17 @@ public class UsuarioController {
         consumidor.setTelefono(usuarioSave.getTelefono());
         consumidor.setCorreo(usuarioSave.getEmail()); // O utilizar el correo del usuario
         consumidor.setDireccion(usuarioSave.getDireccion());
+
+        // Establecer la relación bidireccional
         consumidor.setUsuario(usuarioGuardado);
+        usuarioGuardado.setConsumidores(consumidor);
+
+        // Guardar el consumidor en la base de datos
         consumidoresServices.guardarConsumidor(consumidor);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioGuardado);
     }
+
 
 
 
@@ -88,13 +94,16 @@ public class UsuarioController {
             Ofertantes ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuario);
             if (ofertante == null) {
                 ofertante = new Ofertantes();
-                ofertante.setUsuario(usuario);
                 ofertante.setNombre(usuario.getNombre());
                 ofertante.setApellidos(usuario.getApellidos());
-                ofertante.setNif(usuario.getNif()); // Suponiendo que el Consumidor también tiene estos campos
+                ofertante.setNif(usuario.getNif()); // Suponiendo que el Ofertante también tiene estos campos
                 ofertante.setTelefono(usuario.getTelefono());
                 ofertante.setCorreo(usuario.getEmail()); // O utilizar el correo del usuario
                 ofertante.setDireccion(usuario.getDireccion());
+                ofertante.setUsuario(usuario);
+
+                // Establecer la relación bidireccional
+                usuario.setOfertante(ofertante);
 
                 ofertantesServices.guardarOfertante(ofertante);
 
@@ -111,6 +120,7 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\": \"Tipo de sesión inválido\"}");
         }
     }
+
 
 
     @DeleteMapping("/usuarios/{id}")

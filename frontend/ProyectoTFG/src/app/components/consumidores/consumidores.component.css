@@ -1,0 +1,38 @@
+/* Estilo para la tabla */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-collapse: collapse;
+}
+
+/* Estilo para las celdas del encabezado */
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Estilo para el encabezado de la tabla */
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Estilo para las filas impares */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Estilo para las celdas de los datos */
+.table tbody td {
+    vertical-align: middle;
+}
+
+/* Hover sobre las filas */
+.table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}

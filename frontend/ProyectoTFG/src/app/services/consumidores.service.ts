@@ -16,4 +16,7 @@ export class ConsumidoresService {
     const url = `${this.url}/usuario/${user}`;
     return this.http.get<Consumidores>(url);
   }
+  listarConsumidores(): Observable<Consumidores[]> {
+    return this.http.get<Consumidores[]>(this.url);
+  }
 }

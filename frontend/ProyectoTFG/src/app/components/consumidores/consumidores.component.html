@@ -1,1 +1,22 @@
 <app-navbar></app-navbar>
+<div class="container m-5">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let consumidor of consumidores">
+            <td>{{ consumidor.nombre }}</td>
+            <td>{{ consumidor.apellidos }}</td>
+            <td>{{ consumidor.correo }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+</div>
+  
+  

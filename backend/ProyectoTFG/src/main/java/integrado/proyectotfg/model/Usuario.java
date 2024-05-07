@@ -38,7 +38,10 @@ public class Usuario implements Serializable {
     private String direccion;
 
     @OneToOne(mappedBy = "usuario")
-    private Consumidores consumidor;
+    private Ofertantes ofertante;
+
+    @OneToOne(mappedBy = "usuario")
+    private Consumidores consumidores;
 
     public Usuario() {
     }
@@ -123,12 +126,20 @@ public class Usuario implements Serializable {
         this.direccion = direccion;
     }
 
-    public Consumidores getConsumidor() {
-        return consumidor;
+    public Ofertantes getOfertante() {
+        return ofertante;
     }
 
-    public void setConsumidor(Consumidores consumidor) {
-        this.consumidor = consumidor;
+    public void setOfertante(Ofertantes ofertante) {
+        this.ofertante = ofertante;
+    }
+
+    public Consumidores getConsumidores() {
+        return consumidores;
+    }
+
+    public void setConsumidores(Consumidores consumidores) {
+        this.consumidores = consumidores;
     }
 
     @Override

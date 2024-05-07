@@ -35,8 +35,9 @@ public class Ofertantes {
             inverseJoinColumns = {@JoinColumn(name = "idConsumidores")})
     private Set<Consumidores> consumidor = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JsonIgnore
     private Usuario usuario;
 
 

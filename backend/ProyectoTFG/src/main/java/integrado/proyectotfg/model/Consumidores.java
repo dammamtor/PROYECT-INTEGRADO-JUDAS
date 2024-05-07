@@ -41,8 +41,9 @@ public class Consumidores {
     private Set<Ofertantes> ofertantes = new HashSet<>();
 
     // Añade la relación con Usuario
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JsonIgnore
     private Usuario usuario;
 
     public Consumidores() {
