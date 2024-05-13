@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,14 +11,22 @@ import { UsuarioService } from '../../services/usuario.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  constructor(private router: Router, private usuarioService: UsuarioService) {}
+  nombreUsuario: string | null;
+  constructor(private router: Router, private usuarioService: UsuarioService,private authService: AuthService) {
+    this.nombreUsuario = this.authService.obtenerNombreUsuarioEnSesion();
+  }
 
-  irAHomeDelUsuario(): void {
-    const usuario = this.usuarioService.usuario;
-    if (usuario) {
-      this.router.navigate(['/consumidores/user', usuario]);
-    } else {
-      console.error("No se ha proporcionado un nombre de usuario.");
-    }
+  
+  irAConsumidores(): void {
+    this.router.navigate(['/consumidores']);
+  }
+
+  irAHome(): void {
+    this.router.navigate(['/consumidores/home', this.nombreUsuario]);
+  }
+
+  cerrarSesion(): void {
+    this.authService.limpiarSesion();
+    this.router.navigate(['/login']);
   }
 }

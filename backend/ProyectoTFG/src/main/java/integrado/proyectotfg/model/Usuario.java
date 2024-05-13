@@ -1,5 +1,6 @@
 package integrado.proyectotfg.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -38,9 +39,11 @@ public class Usuario implements Serializable {
     private String direccion;
 
     @OneToOne(mappedBy = "usuario")
+    @JsonIgnore
     private Ofertantes ofertante;
 
     @OneToOne(mappedBy = "usuario")
+    @JsonIgnore
     private Consumidores consumidores;
 
     public Usuario() {

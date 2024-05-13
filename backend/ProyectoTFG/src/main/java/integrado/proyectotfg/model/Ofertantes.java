@@ -37,7 +37,6 @@ public class Ofertantes {
 
     @OneToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    @JsonIgnore
     private Usuario usuario;
 
 

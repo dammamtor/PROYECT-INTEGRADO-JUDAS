@@ -43,7 +43,6 @@ public class Consumidores {
     // Añade la relación con Usuario
     @OneToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    @JsonIgnore
     private Usuario usuario;
 
     public Consumidores() {

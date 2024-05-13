@@ -1,0 +1,4 @@
+.nav-link:hover {
+    cursor: pointer;
+    text-decoration: underline; /* Puedes personalizar el efecto de subrayado según tus preferencias */
+}

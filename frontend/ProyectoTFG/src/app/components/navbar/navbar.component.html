@@ -1,8 +1,3 @@
-<!-- <div class="navbar">
-     Otros elementos del navbar 
-    <button (click)="irAHomeDelUsuario()">Ir a Home del Usuario</button>
-    <button routerLink="/consumidores" routerLinkActive="active">Lista de consumidores</button>
-  </div> -->
 <header class="p-3 text-bg-dark">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -13,10 +8,11 @@
       </a>
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+        <li>
+          <span class="nav-link px-2 text-white" (click)="irAConsumidores()">Consumidores</span>
+        </li>
+        <li><a href="#" class="nav-link px-2 text-white">Crear Actividad</a></li>
+        <li><a href="#" class="nav-link px-2 text-white">Notificaciones</a></li>
         <li><a href="#" class="nav-link px-2 text-white">About</a></li>
       </ul>
 
@@ -26,8 +22,8 @@
       </form>
 
       <div class="text-end">
-        <button type="button" class="btn btn-outline-light me-2">Login</button>
-        <button type="button" class="btn btn-warning">Sign-up</button>
+        <button type="button" class="btn btn-outline-light me-2" (click)="irAHome()">{{nombreUsuario}}</button>
+        <button type="button" class="btn btn-warning" (click)="cerrarSesion()">Cerrar sesion</button>
       </div>
     </div>
   </div>
