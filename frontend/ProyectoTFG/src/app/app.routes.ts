@@ -5,6 +5,7 @@ import { ConsumidoresComponent } from './components/consumidores/consumidores.co
 import { HomeComponent } from './components/home/home.component';
 import { OfertantesComponent } from './components/ofertantes/ofertantes.component';
 import { HomeConsumidorComponent } from './components/home-consumidor/home-consumidor.component';
+import { ConsumidorDataComponent } from './components/consumidor-data/consumidor-data.component';
 
 export const routes: Routes = [
     {
@@ -30,5 +31,9 @@ export const routes: Routes = [
     {
         path: "",
         component: HomeComponent
+    },
+    {
+        path: "consumidores/data/:id",
+        component: ConsumidorDataComponent
     }
 ];

@@ -29,11 +29,9 @@ public class Consumidores {
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
     private Set<Notificaciones> notificaciones = new HashSet<>();
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
-    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
-    private Set<Reseñas> reseñas = new HashSet<>();
+    private Set<Reseñas> reviews = new HashSet<>();
 
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
-    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
     private Set<SolicitudesActividades> solicitudesActividades = new HashSet<>();
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
     private Set<HistorialActividades> historialActividades = new HashSet<>();
@@ -113,12 +111,12 @@ public class Consumidores {
         this.notificaciones = notificaciones;
     }
 
-    public Set<Reseñas> getReseñas() {
-        return reseñas;
+    public Set<Reseñas> getReviews() {
+        return reviews;
     }
 
-    public void setReseñas(Set<Reseñas> reseñas) {
-        this.reseñas = reseñas;
+    public void setReviews(Set<Reseñas> reviews) {
+        this.reviews = reviews;
     }
 
     public Set<SolicitudesActividades> getSolicitudesActividades() {
@@ -164,7 +162,7 @@ public class Consumidores {
                 ", correo='" + correo + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", notificaciones=" + notificaciones +
-                ", reseñas=" + reseñas +
+                ", reseñas=" + reviews +
                 ", solicitudesActividades=" + solicitudesActividades +
                 ", historialActividades=" + historialActividades +
                 ", ofertantes=" + ofertantes +

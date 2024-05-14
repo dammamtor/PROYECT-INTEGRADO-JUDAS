@@ -1,7 +1,9 @@
 package integrado.proyectotfg.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,12 +16,13 @@ public class Reseñas {
     private int Puntos;
     @Column(nullable = false)
     private String comentario;
-    @Column(nullable = false)
-    private Date fecha;
+    @Column(nullable = false, columnDefinition = "DATE")
+    private LocalDate fecha;
 
     //RELACIONES
     @ManyToOne
     @JoinColumn(name = "id_consumidores")
+    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
     private Consumidores consumidor;
 
     @ManyToOne
@@ -53,11 +56,11 @@ public class Reseñas {
         this.comentario = comentario;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

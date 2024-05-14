@@ -1,3 +1,5 @@
+import { Reseñas } from "./Reseñas";
+
 export interface Consumidores {
     id: number;
     nombre: string;
@@ -6,4 +8,5 @@ export interface Consumidores {
     telefono: string;
     correo: string;
     direccion: string;
+    reviews: Reseñas[]
 }

@@ -19,4 +19,8 @@ export class ConsumidoresService {
   listarConsumidores(): Observable<Consumidores[]> {
     return this.http.get<Consumidores[]>(this.url);
   }
+  obtenerConsumidorPorId(id: number): Observable<Consumidores> {
+    const url = `${this.url}/${id}`;
+    return this.http.get<Consumidores>(url);
+  }
 }

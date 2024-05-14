@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+@if (consumidor$) {
+<div class="container">
+    <h2 class="mt-4 mb-3">Datos del Consumidor</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="card-text"><strong>ID:</strong> {{ consumidor$.id }}</p>
+                    <p class="card-text"><strong>Nombre:</strong> {{ consumidor$.nombre }}</p>
+                    <p class="card-text"><strong>Apellidos:</strong> {{ consumidor$.apellidos }}</p>
+                    <p class="card-text"><strong>NIF:</strong> {{ consumidor$.nif }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="card-text"><strong>Teléfono:</strong> {{ consumidor$.telefono }}</p>
+                    <p class="card-text"><strong>Correo:</strong> {{ consumidor$.correo }}</p>
+                    <p class="card-text"><strong>Dirección:</strong> {{ consumidor$.direccion }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (consumidor$.reviews.length > 0) {
+<div class="container">
+    <h2 class="mt-4 mb-3">Reseñas de consumidor</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                @for (item of consumidor$.reviews; track $index) {
+                <div class="col-md-12">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <p><strong>Actividad:</strong> {{ item.actividad.descripcion }}</p>
+                            <p><strong>Fecha de inicio:</strong> {{ item.actividad.fec_inicio }}</p>
+                            <p><strong>Fecha de finalización:</strong> {{ item.actividad.fec_final }}</p>
+                            <p><strong>Precio:</strong> {{ item.actividad.precio }}</p>
+                            <p><strong>Comentario:</strong> {{ item.comentario }}</p>
+                            <p><strong>Puntos:</strong> {{ item.puntos }}</p>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+} @else {
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">No se encontraron datos del consumidor</h5>
+            <p class="card-text">Lo sentimos, no hemos podido encontrar información sobre este consumidor en nuestra
+                base de datos.</p>
+            <p class="card-text">Por favor, asegúrate de que el ID del consumidor sea válido e inténtalo de nuevo.</p>
+        </div>
+    </div>
+</div>}
+
+}
+@else {
+<div class="container mt-4">
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">No se encontraron datos del consumidor</h4>
+        <p>Lo sentimos, no hemos podido encontrar información sobre este consumidor en nuestra base de datos.</p>
+        <hr>
+        <p class="mb-0">Por favor, asegúrate de que el ID del consumidor sea válido e inténtalo de nuevo.</p>
+    </div>
+</div>}

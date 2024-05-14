@@ -6,6 +6,7 @@
             <th>Nombre</th>
             <th>Apellidos</th>
             <th>Correo</th>
+            <th>Mira con mas detalle</th>
           </tr>
         </thead>
         <tbody>
@@ -13,6 +14,7 @@
             <td>{{ consumidor.nombre }}</td>
             <td>{{ consumidor.apellidos }}</td>
             <td>{{ consumidor.correo }}</td>
+            <td id="ver-mas" (click)="verDetalles(consumidor.id)">Ver más</td>
           </tr>
         </tbody>
       </table>

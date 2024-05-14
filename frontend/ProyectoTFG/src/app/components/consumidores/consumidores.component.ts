@@ -28,4 +28,8 @@ export class ConsumidoresComponent {
         console.log(consumidores);
       });
   }
+
+  verDetalles(id: number): void {
+    this.ruta.navigate(['/consumidores/data', id]);
+  }
 }

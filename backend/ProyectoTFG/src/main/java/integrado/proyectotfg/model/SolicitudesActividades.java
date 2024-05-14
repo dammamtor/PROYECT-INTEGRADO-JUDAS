@@ -19,6 +19,7 @@ public class SolicitudesActividades {
     //RELACIONES
     @ManyToOne
     @JoinColumn(name = "id_consumidores")
+    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
     private Consumidores consumidor;
 
     @ManyToOne
@@ -27,6 +28,7 @@ public class SolicitudesActividades {
 
     @ManyToOne
     @JoinColumn(name = "id_ofertantes")
+    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
     private Ofertantes ofertante;
 
     public SolicitudesActividades() {
