@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h2 class="text-center mb-4">Actividades Disponibles</h2>
+            <div class="select-container"> 
+                <select class="form-select" (change)="filtrarPorTipo($event)">
+                    <option value="">Todos los tipos</option>
+                    <option *ngFor="let tipo of tiposActividades" [value]="tipo.nombre">{{ tipo.nombre }}</option>
+                </select>
+            </div>
+            @for (item of actividades; track $index) {
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">{{ item.nombre }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ item.descripcion }}</p>
+                    <p class="card-text">Fecha de inicio: {{ item.fec_inicio | date }}</p>
+                    <p class="card-text">Fecha final: {{ item.fec_final | date }}</p>
+                    <p class="card-text">Precio: {{ item.precio }} €</p>
+                    @if (item.materiales) {
+                    <p class="card-text">Materiales: {{ item.materiales }}</p>
+                    }
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" >Apúntate</button>
+                        <!--(click)="irASolicitudActividad(idConsumidor, item.id)"-->
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

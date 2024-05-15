@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Consumidores } from '../models/Consumidores';
 import { Observable } from 'rxjs';
+import { SolicitudesActividades } from '../models/SolicitudesActividades';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,9 @@ export class ConsumidoresService {
   obtenerConsumidorPorId(id: number): Observable<Consumidores> {
     const url = `${this.url}/${id}`;
     return this.http.get<Consumidores>(url);
+  }
+  enviarSolicitudActividad(idConsumidor: number, idActividad: number): Observable<SolicitudesActividades> {
+    const url = `${this.url}/${idConsumidor}/solicitudes-actividades/${idActividad}`;
+    return this.http.post<SolicitudesActividades>(url, null); 
   }
 }

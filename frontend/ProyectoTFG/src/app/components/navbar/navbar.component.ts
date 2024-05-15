@@ -25,6 +25,10 @@ export class NavbarComponent {
     this.router.navigate(['/consumidores/home', this.nombreUsuario]);
   }
 
+  irAActividades(): void{
+    this.router.navigate(["/actividades"]);
+  }
+
   cerrarSesion(): void {
     this.authService.limpiarSesion();
     this.router.navigate(['/login']);
