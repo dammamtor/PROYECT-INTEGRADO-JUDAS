@@ -5,11 +5,13 @@ import { Consumidores } from '../../models/Consumidores';
 import { UsuarioService } from '../../services/usuario.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { AuthService } from '../../services/auth.service';
+import { SolicitudesActividades } from '../../models/SolicitudesActividades';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home-consumidor',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, CommonModule],
   templateUrl: './home-consumidor.component.html',
   styleUrl: './home-consumidor.component.css'
 })
@@ -17,6 +19,7 @@ export class HomeConsumidorComponent {
   public consumidor: Consumidores | null = null;
   public usuario: string | null = null;
   public idConsumidor: number | null = null; // Agrega una nueva variable para almacenar el id del consumidor
+  public solicitudesActividades: SolicitudesActividades[] = [];
 
   constructor(
     private usuarioService: UsuarioService,
@@ -35,6 +38,12 @@ export class HomeConsumidorComponent {
       this.obtenerConsumidorPorUsername(userId);
       this.guardarIdConsumidorLocalStorage(userId); // Llama al método para guardar el ID del consumidor en el localStorage
       this.obtenerIdConsumidorLocalStorage(); // Llama al método para obtener el ID del consumidor del localStorage
+
+      // Llama al método para obtener las solicitudes de actividades por el ID del consumidor
+      if (this.idConsumidor) {
+        this.obtenerSolicitudesActividadesPorConsumidor(this.idConsumidor);
+      }
+
     } else {
       console.error("No se proporcionó un ID de usuario en la ruta.");
     }
@@ -62,5 +71,24 @@ export class HomeConsumidorComponent {
   obtenerIdConsumidorLocalStorage(): void {
     this.idConsumidor = this.authService.obtenerIdConsumidorDeLocalStorage();
     console.log("DESDE EL HOME, ID CONSUMIDOR: ", this.idConsumidor);
+  }
+
+  obtenerSolicitudesActividadesPorConsumidor(idConsumidor: number): void {
+    this.consumidoresService.obtenerSolicitudesActividadesPorConsumidor(idConsumidor)
+      .subscribe({
+        next: (solicitudes: SolicitudesActividades[]) => {
+          console.log('Solicitudes de actividades:', solicitudes);
+          this.solicitudesActividades = solicitudes;
+        },
+        error: (error) => {
+          console.error('Error al obtener las solicitudes de actividades:', error);
+        }
+      });
+  }
+  escribirReview(solicitud: SolicitudesActividades): void {
+    // Aquí puedes redirigir a una página para que el usuario escriba su review
+    console.log("Escribir review para la solicitud:", solicitud);
+    // Por ejemplo:
+    // this.ruta.navigate(['/escribir-review', solicitud.id]);
   }
 }

@@ -31,8 +31,8 @@
                     <div class="card mt-4">
                         <div class="card-body">
                             <p><strong>Actividad:</strong> {{ item.actividad.descripcion }}</p>
-                            <p><strong>Fecha de inicio:</strong> {{ item.actividad.fec_inicio }}</p>
-                            <p><strong>Fecha de finalización:</strong> {{ item.actividad.fec_final }}</p>
+                            <p><strong>Fecha de inicio:</strong> {{ item.actividad.fec_inicio | date }}</p>
+                            <p><strong>Fecha de finalización:</strong> {{ item.actividad.fec_final | date}}</p>
                             <p><strong>Precio:</strong> {{ item.actividad.precio }}</p>
                             <p><strong>Comentario:</strong> {{ item.comentario }}</p>
                             <p><strong>Puntos:</strong> {{ item.puntos }}</p>

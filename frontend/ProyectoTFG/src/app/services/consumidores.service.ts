@@ -28,4 +28,8 @@ export class ConsumidoresService {
     const url = `${this.url}/${idConsumidor}/solicitudes-actividades/${idActividad}`;
     return this.http.post<SolicitudesActividades>(url, null); 
   }
+  obtenerSolicitudesActividadesPorConsumidor(idConsumidor: number): Observable<SolicitudesActividades[]> {
+    const url = `${this.url}/${idConsumidor}/solicitudes-actividades`;
+    return this.http.get<SolicitudesActividades[]>(url);
+  }
 }

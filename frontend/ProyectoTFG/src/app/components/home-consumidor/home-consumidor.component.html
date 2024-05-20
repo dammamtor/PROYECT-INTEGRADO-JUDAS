@@ -5,9 +5,10 @@
             <h1>BIENVENIDO {{ usuario }}</h1>
             <h2>Iniciaste sesión como consumidor</h2>
             <h3>Este es tu home, aquí abajo puedes ver tus datos:</h3>
-            <div class="card">
+
+            <!-- Card para mostrar los datos del consumidor -->
+            <div class="card mb-3" *ngIf="consumidor">
                 <div class="card-body">
-                    @if (consumidor) {
                     <p><strong>ID:</strong> {{ consumidor.id }}</p>
                     <p><strong>Nombre:</strong> {{ consumidor.nombre }}</p>
                     <p><strong>Apellidos:</strong> {{ consumidor.apellidos }}</p>
@@ -15,10 +16,43 @@
                     <p><strong>Teléfono:</strong> {{ consumidor.telefono }}</p>
                     <p><strong>Correo:</strong> {{ consumidor.correo }}</p>
                     <p><strong>Dirección:</strong> {{ consumidor.direccion }}</p>
-                    }
-                    @else {
+                </div>
+            </div>
+
+            <!-- Card para mostrar las solicitudes de actividades -->
+            <div class="card mb-3" *ngIf="solicitudesActividades && solicitudesActividades.length > 0">
+                <div class="card-body">
+                    <h3>Solicitudes de actividades:</h3>
+                    <ul>
+                        <li *ngFor="let solicitud of solicitudesActividades">
+                            <p><strong>Nombre de la actividad:</strong> {{ solicitud.actividad.nombre }}</p>
+                            <p><strong>Descripción:</strong> {{ solicitud.actividad.descripcion }}</p>
+                            <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
+                            <p><strong>Fecha de solicitud:</strong> {{ solicitud.fec_solicitud | date }}</p>
+
+                            <!-- Botón "Escribe tu review" que se muestra pero deshabilitado si la solicitud no está Aceptada -->
+                            <button class="btn btn-primary" [disabled]="solicitud.estado !== 'Aceptado'"
+                                (click)="escribirReview(solicitud)">
+                                Escribe tu reseña
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <!-- Card para mostrar el mensaje si no hay solicitudes de actividades -->
+            <div class="card mb-3" *ngIf="!(solicitudesActividades && solicitudesActividades.length > 0)">
+                <div class="card-body">
+                    <p>No tienes solicitudes de actividades.</p>
+                </div>
+            </div>
+
+            <!-- Card para mostrar el mensaje si no se encontraron datos del consumidor -->
+            <div class="card mb-3" *ngIf="!consumidor">
+                <div class="card-body">
                     <p>No se encontraron datos del consumidor.</p>
-                    }
                 </div>
             </div>
         </div>

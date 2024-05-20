@@ -1,1 +1,11 @@
-<p>solicitudes works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+    <h2 class="text-center">Solicitar Actividad</h2>
+    @if (!confirmado) {
+    <div class="alert alert-info">¿Estás seguro de que deseas iniciar esta actividad?</div>
+    <button (click)="confirmarSolicitud()">Sí, estoy seguro</button>
+    <button (click)="cancelar()">Cancelar</button>
+    } @else {
+    <div class="alert alert-info">{{ mensaje }}</div>
+    }
+</div>
