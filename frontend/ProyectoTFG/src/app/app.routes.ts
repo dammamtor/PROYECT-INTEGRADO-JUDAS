@@ -8,6 +8,7 @@ import { HomeConsumidorComponent } from './components/home-consumidor/home-consu
 import { ConsumidorDataComponent } from './components/consumidor-data/consumidor-data.component';
 import { ActividadesComponent } from './components/actividades/actividades.component';
 import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
+import { HomeOfertanteComponent } from './components/home-ofertante/home-ofertante.component';
 
 export const routes: Routes = [
     {
@@ -33,6 +34,10 @@ export const routes: Routes = [
     {
         path: "ofertantes",
         component: OfertantesComponent
+    },
+    {
+        path: "ofertantes/home/:user",
+        component: HomeOfertanteComponent
     },
     {
         path: "",

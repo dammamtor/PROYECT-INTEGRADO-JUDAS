@@ -3,10 +3,7 @@ package integrado.proyectotfg.controller;
 import integrado.proyectotfg.model.*;
 import integrado.proyectotfg.model.DTO.ActividadesRequestDTO;
 import integrado.proyectotfg.repository.TipoActividadRepository;
-import integrado.proyectotfg.services.ActividadesServicesImpl;
-import integrado.proyectotfg.services.OfertantesServicesImpl;
-import integrado.proyectotfg.services.ReseñasServicesImpl;
-import integrado.proyectotfg.services.SolicitudesActividadesServicesImpl;
+import integrado.proyectotfg.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +30,8 @@ public class OfertantesController {
     SolicitudesActividadesServicesImpl solicitudesActividadesServices;
     @Autowired
     ReseñasServicesImpl reseñasServices;
+    @Autowired
+    UsuarioServicesImpl usuarioServices;
 
 
     @GetMapping("/ofertantes")
@@ -165,5 +164,12 @@ public class OfertantesController {
         }
 
         return ResponseEntity.ok(listaOpiniones);
+    }
+
+    @GetMapping("/ofertantes/usuario/{user}")
+    public ResponseEntity<Ofertantes> obtenerOfertantePorUsername(@PathVariable String user) {
+        Usuario usuario = usuarioServices.obtenerUsuarioPorUsername(user);
+        Ofertantes ofertante = ofertantesService.obtenerOfertantePorUsuario(usuario);
+        return ResponseEntity.ok(ofertante);
     }
 }

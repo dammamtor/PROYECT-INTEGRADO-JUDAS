@@ -30,7 +30,6 @@ public class Actividades {
     //RELACIONES
     @ManyToOne
     @JoinColumn(name = "id_ofertantes")
-    @JsonIgnore // Ignorar la serialización de actividades para evitar recursión infinita
 
     private Ofertantes ofertante;
 

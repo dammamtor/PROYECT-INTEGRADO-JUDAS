@@ -1,4 +1,5 @@
 import { Reseñas } from "./Reseñas";
+import { Usuarios } from "./Usuarios";
 
 export interface Consumidores {
     id: number;
@@ -8,5 +9,6 @@ export interface Consumidores {
     telefono: string;
     correo: string;
     direccion: string;
-    reviews: Reseñas[]
+    reviews: Reseñas[];
+    usuario?: Usuarios
 }

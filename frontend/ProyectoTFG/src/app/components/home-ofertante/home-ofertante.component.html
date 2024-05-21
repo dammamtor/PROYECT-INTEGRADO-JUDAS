@@ -1,1 +1,56 @@
-<p>home-ofertante works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1>BIENVENIDO {{ usuario }}</h1>
+            <h2>Iniciaste sesión como ofertante</h2>
+            <h3>Este es tu home, aquí abajo puedes ver tus datos:</h3>
+
+            <div class="card mb-3" *ngIf="ofertante">
+                <div class="card-body">
+                    <p><strong>ID:</strong> {{ ofertante.id }}</p>
+                    <p><strong>Nombre:</strong> {{ ofertante.nombre }}</p>
+                    <p><strong>Apellidos:</strong> {{ ofertante.apellidos }}</p>
+                    <p><strong>NIF:</strong> {{ ofertante.nif }}</p>
+                    <p><strong>Teléfono:</strong> {{ ofertante.telefono }}</p>
+                    <p><strong>Correo:</strong> {{ ofertante.correo }}</p>
+                    <p><strong>Dirección:</strong> {{ ofertante.direccion }}</p>
+                </div>
+            </div>
+
+            <!-- Card para mostrar las solicitudes de actividades -->
+            <div class="card mb-3" *ngIf="solicitudesActividades && solicitudesActividades.length > 0">
+                <div class="card-body">
+                    <h3>Solicitudes de actividades:</h3>
+                    <ul>
+                        <li *ngFor="let solicitud of solicitudesActividades">
+                            <p><strong>Nombre de la actividad:</strong> {{ solicitud.actividad.nombre }}</p>
+                            <p><strong>Descripción:</strong> {{ solicitud.actividad.descripcion }}</p>
+                            <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
+                            <p><strong>Fecha de solicitud:</strong> {{ solicitud.fec_solicitud | date }}</p>
+
+                            <!-- Botón "Escribe tu review" que se muestra pero deshabilitado si la solicitud no está Aceptada -->
+                            <button class="btn btn-primary" [disabled]="solicitud.estado !== 'Aceptado'">
+                                Habilitar solicitud
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="card mb-3" *ngIf="!(solicitudesActividades && solicitudesActividades.length > 0)">
+                <div class="card-body">
+                    <p>No tienes solicitudes de actividades.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3" *ngIf="!ofertante">
+                <div class="card-body">
+                    <p>No se encontraron datos del ofertante.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

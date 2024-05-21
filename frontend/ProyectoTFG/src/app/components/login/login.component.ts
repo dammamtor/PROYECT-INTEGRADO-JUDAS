@@ -28,7 +28,7 @@ export class LoginComponent {
         if (this.tipoSesion === '1') {
           this.ruta.navigate(["consumidores/home", this.user]);
         } else if (this.tipoSesion === '2') {
-          this.ruta.navigate(["ofertantes"]);
+          this.ruta.navigate(["ofertantes/home", this.user]);
         } 
       },
       error: error => {

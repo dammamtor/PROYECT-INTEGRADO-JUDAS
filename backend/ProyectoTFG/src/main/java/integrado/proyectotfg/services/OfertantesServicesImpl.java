@@ -1,6 +1,7 @@
 package integrado.proyectotfg.services;
 
 import integrado.proyectotfg.model.Actividades;
+import integrado.proyectotfg.model.Consumidores;
 import integrado.proyectotfg.model.Ofertantes;
 import integrado.proyectotfg.model.Usuario;
 import integrado.proyectotfg.repository.ActividadesRepository;
@@ -18,6 +19,8 @@ public class OfertantesServicesImpl implements OfertantesServices {
 
     @Autowired
     private ActividadesRepository actividadesRepository;
+    @Autowired
+    private OfertantesRepository ofertantesRepository;
 
     @Override
     public List<Ofertantes> listarOfertantes() {
@@ -93,6 +96,11 @@ public class OfertantesServicesImpl implements OfertantesServices {
 
     @Override
     public Ofertantes obtenerOfertantePorUsuario(Usuario usuario) {
-        return repository.findByUsuario(usuario);
-    }
+        Ofertantes ofertante = ofertantesRepository.findByUsuario(usuario);
+
+        if (ofertante == null) {
+            throw new RuntimeException("No se encontró un consumidor asociado al usuario proporcionado");
+        }
+
+        return ofertante;    }
 }
