@@ -29,10 +29,16 @@
                             <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
                             <p><strong>Fecha de solicitud:</strong> {{ solicitud.fec_solicitud | date }}</p>
 
-                            <!-- Botón "Escribe tu review" que se muestra pero deshabilitado si la solicitud no está Aceptada -->
-                            <button class="btn btn-primary" [disabled]="solicitud.estado !== 'Aceptado'">
-                                Habilitar solicitud
-                            </button>
+                            <ng-container *ngIf="solicitud.estado === 'Aceptado'">
+                                <p><strong>¡Esta solicitud ha sido aceptada!</strong></p>
+                            </ng-container>
+                        
+                            <ng-container *ngIf="ofertante && solicitud.estado !== 'Aceptado'">
+                                <button class="btn btn-success mt-2"
+                                    (click)="redirigirAceptarSolicitud(ofertante.id, solicitud.id)">
+                                    Habilitar solicitud
+                                </button>
+                            </ng-container>
                         </li>
                     </ul>
                 </div>

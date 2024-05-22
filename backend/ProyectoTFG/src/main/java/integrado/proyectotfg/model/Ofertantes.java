@@ -27,7 +27,6 @@ public class Ofertantes {
 
     //RELACIONES
     @OneToMany(mappedBy = "ofertante", cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Actividades> actividades;
 
     @ManyToMany(cascade = {CascadeType.ALL})

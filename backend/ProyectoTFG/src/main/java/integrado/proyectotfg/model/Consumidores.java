@@ -29,9 +29,11 @@ public class Consumidores {
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
     private Set<Notificaciones> notificaciones = new HashSet<>();
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Reseñas> reviews = new HashSet<>();
 
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<SolicitudesActividades> solicitudesActividades = new HashSet<>();
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
     private Set<HistorialActividades> historialActividades = new HashSet<>();

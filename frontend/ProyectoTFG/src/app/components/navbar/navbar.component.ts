@@ -20,7 +20,7 @@ export class NavbarComponent {
     this.rolUsuario = this.authService.obtenerRolUsuarioEnSesion();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   irAConsumidores(): void {
     if (this.rolUsuario === 'CONSUMER') {
@@ -33,7 +33,13 @@ export class NavbarComponent {
   }
 
   irAActividades(): void {
-    this.router.navigate(['/actividades']);
+    if (this.rolUsuario === 'CONSUMER') {
+      this.router.navigate(['/actividades']);
+    } else if (this.rolUsuario === 'PROVIDER') {
+      this.router.navigate(['/ofertantes/lista-actividades-ofertante']);
+    } else {
+      console.error('Acceso denegado: el usuario no tiene un rol válido');
+    }
   }
   irAHome(): void {
     if (this.rolUsuario === 'CONSUMER') {

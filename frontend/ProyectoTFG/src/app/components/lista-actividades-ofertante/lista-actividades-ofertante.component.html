@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container mt-4">
+    <div *ngIf="ofertante" class="card">
+        <div class="card-header">
+            <h5 class="card-title">Actividades del Ofertante: {{ ofertante.nombre }} {{ ofertante.apellidos }}</h5>
+        </div>
+        <div class="card-body">
+            <div *ngIf="ofertante.actividades && ofertante.actividades.length > 0; else noActivities">
+                <ul class="list-group">
+                    <li *ngFor="let actividad of ofertante.actividades" class="list-group-item">
+                        <h6 class="mb-1">{{ actividad.nombre }}</h6>
+                        <p class="mb-1">{{ actividad.descripcion }}</p>
+                        <p class="mb-1">Fecha de inicio: {{ actividad.fec_inicio | date }}</p>
+                        <p class="mb-1">Fecha final: {{ actividad.fec_final | date }}</p>
+                        <p class="mb-1">Precio: {{ actividad.precio }}</p>
+                        <p *ngIf="actividad.materiales" class="mb-1">Materiales: {{ actividad.materiales }}</p>
+                        <p class="mb-0">Tipo de Actividad: {{ actividad.tipoActividad.nombre }}</p>
+                    </li>
+                </ul>
+            </div>
+            <ng-template #noActivities>
+                <p>No hay actividades disponibles para este ofertante.</p>
+            </ng-template>
+        </div>
+    </div>
+</div>

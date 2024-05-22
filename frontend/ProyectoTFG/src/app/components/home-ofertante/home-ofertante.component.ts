@@ -86,4 +86,7 @@ export class HomeOfertanteComponent {
         }
       });
   }
+  redirigirAceptarSolicitud(ofertanteId: number, idSolicitud: number): void {
+    this.ruta.navigate([`/aceptar-solicitud/${ofertanteId}/${idSolicitud}`]);
+  }
 }

@@ -1,1 +1,23 @@
-<p>ofertantes works!</p>
+<app-navbar></app-navbar>
+<h1 class="text-center">TABLA DE OFERTANTES</h1>
+<div class="container m-5">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Mira con mas detalle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ofertante of ofertantes">
+                <td>{{ ofertante.nombre }}</td>
+                <td>{{ ofertante.apellidos }}</td>
+                <td>{{ ofertante.correo }}</td>
+                <td id="ver-mas" (click)="verDetalles(ofertante.id)">Ver más</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

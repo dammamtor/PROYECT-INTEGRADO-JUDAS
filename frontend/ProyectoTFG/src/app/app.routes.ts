@@ -9,6 +9,9 @@ import { ConsumidorDataComponent } from './components/consumidor-data/consumidor
 import { ActividadesComponent } from './components/actividades/actividades.component';
 import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
 import { HomeOfertanteComponent } from './components/home-ofertante/home-ofertante.component';
+import { OfertanteDataComponent } from './components/ofertante-data/ofertante-data.component';
+import { AceptarSolicitudesComponent } from './components/aceptar-solicitudes/aceptar-solicitudes.component';
+import { ListaActividadesOfertanteComponent } from './components/lista-actividades-ofertante/lista-actividades-ofertante.component';
 
 export const routes: Routes = [
     {
@@ -26,6 +29,10 @@ export const routes: Routes = [
     {
         path: "actividades",
         component: ActividadesComponent
+    },
+    {
+        path: "ofertantes/lista-actividades-ofertante",
+        component: ListaActividadesOfertanteComponent
     },
     {
         path: "consumidores/home/:user",
@@ -48,7 +55,15 @@ export const routes: Routes = [
         component: ConsumidorDataComponent
     },
     {
+        path: "ofertantes/data/:id",
+        component: OfertanteDataComponent
+    },
+    {
         path: "solicitud-actividad/:idConsumidor/:idActividad",
         component: SolicitudesComponent
+    },
+    {
+        path: "aceptar-solicitud/:ofertanteId/:idSolicitud",
+        component: AceptarSolicitudesComponent
     }
 ];

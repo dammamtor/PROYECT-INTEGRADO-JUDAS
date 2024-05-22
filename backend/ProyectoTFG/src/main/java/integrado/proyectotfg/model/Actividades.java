@@ -30,7 +30,7 @@ public class Actividades {
     //RELACIONES
     @ManyToOne
     @JoinColumn(name = "id_ofertantes")
-
+    @JsonIgnore
     private Ofertantes ofertante;
 
     @ManyToOne

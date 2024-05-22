@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ofertantes } from '../models/Ofertantes';
 import { SolicitudesActividades } from '../models/SolicitudesActividades';
+import { Reseñas } from '../models/Reseñas';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,21 @@ export class OfertantesService {
   obtenerSolicitudesActividadesPorOfertante(idOfertante: number): Observable<SolicitudesActividades[]> {
     const url = `${this.url}/${idOfertante}/solicitudes-actividades`;
     return this.http.get<SolicitudesActividades[]>(url);
+  }
+
+  listarOfertantes(): Observable<Ofertantes[]> {
+    return this.http.get<Ofertantes[]>(this.url);
+  }
+  obtenerOfertantePorId(id: number): Observable<Ofertantes> {
+    const url = `${this.url}/${id}`;
+    return this.http.get<Ofertantes>(url);
+  }
+  obtenerReseñasPorOfertanteId(ofertanteId: number): Observable<Reseñas[]> {
+    const url = `${this.url}/${ofertanteId}/opinion-actividades`;
+    return this.http.get<Reseñas[]>(url);
+  }
+  aceptarSolicitudPorId(ofertanteId: number, idSolicitud: number): Observable<{ aceptado: boolean }> {
+    const url = `${this.url}/${ofertanteId}/solicitudes-actividades/${idSolicitud}`;
+    return this.http.put<{ aceptado: boolean }>(url, {});
   }
 }
