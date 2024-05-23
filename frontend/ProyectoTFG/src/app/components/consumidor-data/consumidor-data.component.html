@@ -20,41 +20,27 @@
         </div>
     </div>
 </div>
-@if (consumidor$.reviews.length > 0) {
-<div class="container">
+<div class="container" *ngIf="reviews$ && reviews$.length > 0">
     <h2 class="mt-4 mb-3">Reseñas de consumidor</h2>
     <div class="card">
         <div class="card-body">
             <div class="row">
-                @for (item of consumidor$.reviews; track $index) {
-                <div class="col-md-12">
+                <div class="col-md-12" *ngFor="let item of reviews$; let i = index">
                     <div class="card mt-4">
                         <div class="card-body">
                             <p><strong>Actividad:</strong> {{ item.actividad.descripcion }}</p>
                             <p><strong>Fecha de inicio:</strong> {{ item.actividad.fec_inicio | date }}</p>
-                            <p><strong>Fecha de finalización:</strong> {{ item.actividad.fec_final | date}}</p>
+                            <p><strong>Fecha de finalización:</strong> {{ item.actividad.fec_final | date }}</p>
                             <p><strong>Precio:</strong> {{ item.actividad.precio }}</p>
                             <p><strong>Comentario:</strong> {{ item.comentario }}</p>
                             <p><strong>Puntos:</strong> {{ item.puntos }}</p>
                         </div>
                     </div>
                 </div>
-                }
             </div>
         </div>
     </div>
 </div>
-} @else {
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">No se encontraron datos del consumidor</h5>
-            <p class="card-text">Lo sentimos, no hemos podido encontrar información sobre este consumidor en nuestra
-                base de datos.</p>
-            <p class="card-text">Por favor, asegúrate de que el ID del consumidor sea válido e inténtalo de nuevo.</p>
-        </div>
-    </div>
-</div>}
 
 }
 @else {

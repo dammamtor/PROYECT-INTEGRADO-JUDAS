@@ -13,11 +13,13 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   nombreUsuario: string | null;
+  idOfertante: number | null;
   rolUsuario: string | null;
 
   constructor(private router: Router, private authService: AuthService) {
     this.nombreUsuario = this.authService.obtenerNombreUsuarioEnSesion();
     this.rolUsuario = this.authService.obtenerRolUsuarioEnSesion();
+    this.idOfertante = this.authService.obtenerIdOfertanteDeLocalStorage();
   }
 
   ngOnInit(): void { }
@@ -50,7 +52,14 @@ export class NavbarComponent {
       console.error('Rol de usuario no reconocido');
     }
   }
+  irACrearActividad(): void {
 
+    if (this.idOfertante) {
+      this.router.navigate([`/ofertantes/${this.idOfertante}/crear-actividad`]);
+    } else {
+      console.error('ID de ofertante no disponible');
+    }
+  }
   cerrarSesion(): void {
     this.authService.limpiarSesion();
     this.router.navigate(['/login']);

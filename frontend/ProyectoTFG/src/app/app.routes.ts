@@ -12,6 +12,7 @@ import { HomeOfertanteComponent } from './components/home-ofertante/home-ofertan
 import { OfertanteDataComponent } from './components/ofertante-data/ofertante-data.component';
 import { AceptarSolicitudesComponent } from './components/aceptar-solicitudes/aceptar-solicitudes.component';
 import { ListaActividadesOfertanteComponent } from './components/lista-actividades-ofertante/lista-actividades-ofertante.component';
+import { CrearActividadComponent } from './components/crear-actividad/crear-actividad.component';
 
 export const routes: Routes = [
     {
@@ -65,5 +66,9 @@ export const routes: Routes = [
     {
         path: "aceptar-solicitud/:ofertanteId/:idSolicitud",
         component: AceptarSolicitudesComponent
+    },
+    {
+        path: "ofertantes/:idOfertante/crear-actividad",
+        component: CrearActividadComponent
     }
 ];

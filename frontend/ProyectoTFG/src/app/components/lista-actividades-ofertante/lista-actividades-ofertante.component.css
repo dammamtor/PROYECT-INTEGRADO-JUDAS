@@ -9,6 +9,7 @@
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
@@ -28,15 +29,21 @@
 .list-group-item {
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 15px 20px;
+    transition: background-color 0.3s ease;
 }
 
 .list-group-item:last-child {
     border-bottom: none;
 }
 
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
 .list-group-item h6 {
     margin-bottom: 5px;
-    color: #333;
+    color: #007bff;
 }
 
 .list-group-item p {
@@ -47,6 +54,8 @@
 .no-activities {
     font-style: italic;
     color: #999;
+    text-align: center;
+    margin-top: 20px;
 }
 
 @media (max-width: 576px) {

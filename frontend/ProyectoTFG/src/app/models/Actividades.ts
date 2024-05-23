@@ -1,3 +1,4 @@
+import { Reseñas } from "./Reseñas";
 import { TipoActividad } from "./TipoActividad";
 
 export interface Actividades {
@@ -8,6 +9,6 @@ export interface Actividades {
     fec_final: Date;
     precio: string;
     materiales?: string; // El signo de interrogación indica que el campo es opcional
-    // ofertante: Ofertante;
     tipoActividad: TipoActividad;
+    reseñas: Reseñas
 }

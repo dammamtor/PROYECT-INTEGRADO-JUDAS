@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Consumidores } from '../models/Consumidores';
 import { Observable } from 'rxjs';
 import { SolicitudesActividades } from '../models/SolicitudesActividades';
+import { Reseñas } from '../models/Reseñas';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class ConsumidoresService {
   obtenerSolicitudesActividadesPorConsumidor(idConsumidor: number): Observable<SolicitudesActividades[]> {
     const url = `${this.url}/${idConsumidor}/solicitudes-actividades`;
     return this.http.get<SolicitudesActividades[]>(url);
+  }
+  obtenerReseñaPorIDconsumidor(idConsumidor: number): Observable<Reseñas[]> {
+    const url = `${this.url}/${idConsumidor}/opinion-actividades`;
+    return this.http.get<Reseñas[]>(url);
   }
 }

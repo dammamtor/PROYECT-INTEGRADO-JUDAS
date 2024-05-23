@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Ofertantes } from '../models/Ofertantes';
 import { SolicitudesActividades } from '../models/SolicitudesActividades';
 import { Reseñas } from '../models/Reseñas';
+import { Actividades } from '../models/Actividades';
+import { ActividadesRequestDTO } from '../models/DTO/ActividadesRequestDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +40,9 @@ export class OfertantesService {
   aceptarSolicitudPorId(ofertanteId: number, idSolicitud: number): Observable<{ aceptado: boolean }> {
     const url = `${this.url}/${ofertanteId}/solicitudes-actividades/${idSolicitud}`;
     return this.http.put<{ aceptado: boolean }>(url, {});
+  }
+  crearActividadParaOfertante(ofertanteId: number, actividadDTO: ActividadesRequestDTO): Observable<Actividades> {
+    const url = `${this.url}/${ofertanteId}/actividades`;
+    return this.http.post<Actividades>(url, actividadDTO);
   }
 }

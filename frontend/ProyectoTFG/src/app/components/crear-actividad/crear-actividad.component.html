@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit()" class="container mt-4">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="actividadForm.nombre" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" [(ngModel)]="actividadForm.descripcion" class="form-control"
+            required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="fec_inicio" class="form-label">Fecha de Inicio:</label>
+        <input type="date" id="fec_inicio" name="fec_inicio" [(ngModel)]="actividadForm.fec_inicio" class="form-control"
+            required>
+    </div>
+    <div class="mb-3">
+        <label for="fec_final" class="form-label">Fecha Final:</label>
+        <input type="date" id="fec_final" name="fec_final" [(ngModel)]="actividadForm.fec_final" class="form-control"
+            required>
+    </div>
+    <div class="mb-3">
+        <label for="precio" class="form-label">Precio:</label>
+        <input type="text" id="precio" name="precio" [(ngModel)]="actividadForm.precio" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="materiales" class="form-label">Materiales:</label>
+        <input type="text" id="materiales" name="materiales" [(ngModel)]="actividadForm.materiales" class="form-control"
+            required>
+    </div>
+    <div class="mb-3">
+        <label for="tipoActividadId" class="form-label">Seleccione el Tipo de Actividad:</label>
+        <select id="tipoActividadId" name="tipoActividadId" [(ngModel)]="actividadForm.tipoActividadId"
+            class="form-control" required>
+            <option value="" disabled selected>Seleccione un tipo de actividad</option>
+            <!-- Iterar sobre la lista de tipos de actividades y mostrar cada uno como una opción -->
+            <option *ngFor="let tipo of tiposActividades" [value]="tipo.id">{{ tipo.nombre }}</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Actividad</button>
+</form>

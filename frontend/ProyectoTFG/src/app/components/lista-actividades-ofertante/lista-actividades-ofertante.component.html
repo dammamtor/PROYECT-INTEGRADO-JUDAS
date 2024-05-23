@@ -1,25 +1,38 @@
 <app-navbar></app-navbar>
 <div class="container mt-4">
-    <div *ngIf="ofertante" class="card">
-        <div class="card-header">
-            <h5 class="card-title">Actividades del Ofertante: {{ ofertante.nombre }} {{ ofertante.apellidos }}</h5>
+    <div *ngIf="ofertante" class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">Actividades del Ofertante: {{ ofertante.nombre }} {{ ofertante.apellidos }}</h5>
         </div>
         <div class="card-body">
             <div *ngIf="ofertante.actividades && ofertante.actividades.length > 0; else noActivities">
-                <ul class="list-group">
+                <ul class="list-group list-group-flush">
                     <li *ngFor="let actividad of ofertante.actividades" class="list-group-item">
-                        <h6 class="mb-1">{{ actividad.nombre }}</h6>
+                        <h6 class="mb-1 text-primary">{{ actividad.nombre }}</h6>
                         <p class="mb-1">{{ actividad.descripcion }}</p>
-                        <p class="mb-1">Fecha de inicio: {{ actividad.fec_inicio | date }}</p>
-                        <p class="mb-1">Fecha final: {{ actividad.fec_final | date }}</p>
-                        <p class="mb-1">Precio: {{ actividad.precio }}</p>
-                        <p *ngIf="actividad.materiales" class="mb-1">Materiales: {{ actividad.materiales }}</p>
-                        <p class="mb-0">Tipo de Actividad: {{ actividad.tipoActividad.nombre }}</p>
+                        <p class="mb-1"><strong>Fecha de inicio:</strong> {{ actividad.fec_inicio | date }}</p>
+                        <p class="mb-1"><strong>Fecha final:</strong> {{ actividad.fec_final | date }}</p>
+                        <p class="mb-1"><strong>Precio:</strong> {{ actividad.precio | currency:'EUR' }}</p>
+                        <p *ngIf="actividad.materiales" class="mb-1"><strong>Materiales:</strong> {{ actividad.materiales }}</p>
+                        <p class="mb-0"><strong>Tipo de Actividad:</strong> {{ actividad.tipoActividad.nombre }}</p>
+
+                        <div *ngIf="review$ && review$.length > 0" class="mt-3">
+                            <h6>Reseñas:</h6>
+                            <ul class="list-unstyled">
+                                <ng-container *ngFor="let review of review$">
+                                    <li *ngIf="review.actividad.id === actividad.id">
+                                        <p><strong>Autor:</strong> {{review.consumidor.nombre}} {{review.consumidor.apellidos}}</p>
+                                        <p><strong>Comentario:</strong> {{ review.comentario }}</p>
+                                        <p><strong>Calificación:</strong> {{ review.puntos }} / 5</p>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
             <ng-template #noActivities>
-                <p>No hay actividades disponibles para este ofertante.</p>
+                <p class="no-activities">No hay actividades disponibles para este ofertante.</p>
             </ng-template>
         </div>
     </div>
