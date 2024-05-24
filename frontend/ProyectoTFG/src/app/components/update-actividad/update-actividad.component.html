@@ -1,0 +1,36 @@
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">Actualizar Actividad</h5>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="actividadForm.nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" [(ngModel)]="actividadForm.descripcion" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="fec_inicio" class="form-label">Fecha de Inicio</label>
+                    <input type="date" class="form-control" id="fec_inicio" name="fec_inicio" [(ngModel)]="actividadForm.fec_inicio" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fec_final" class="form-label">Fecha Final</label>
+                    <input type="date" class="form-control" id="fec_final" name="fec_final" [(ngModel)]="actividadForm.fec_final" required>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="text" class="form-control" id="precio" name="precio" [(ngModel)]="actividadForm.precio" required>
+                </div>
+                <div class="mb-3">
+                    <label for="materiales" class="form-label">Materiales</label>
+                    <textarea class="form-control" id="materiales" name="materiales" [(ngModel)]="actividadForm.materiales" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>

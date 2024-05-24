@@ -27,8 +27,6 @@ public class Consumidores {
 
     //RELACIONES
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
-    private Set<Notificaciones> notificaciones = new HashSet<>();
-    @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Reseñas> reviews = new HashSet<>();
 
@@ -105,14 +103,6 @@ public class Consumidores {
     }
 
 
-    public Set<Notificaciones> getNotificaciones() {
-        return notificaciones;
-    }
-
-    public void setNotificaciones(Set<Notificaciones> notificaciones) {
-        this.notificaciones = notificaciones;
-    }
-
     public Set<Reseñas> getReviews() {
         return reviews;
     }
@@ -163,7 +153,6 @@ public class Consumidores {
                 ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
                 ", direccion='" + direccion + '\'' +
-                ", notificaciones=" + notificaciones +
                 ", reseñas=" + reviews +
                 ", solicitudesActividades=" + solicitudesActividades +
                 ", historialActividades=" + historialActividades +

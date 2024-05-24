@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -65,6 +66,28 @@ public class OfertantesController {
         return ResponseEntity.ok(respuesta);
     }
 
+    @GetMapping("/ofertantes/{ofertanteId}/actividades/{actividadId}")
+    public ResponseEntity<Actividades> obtenerActividadOfertante(
+            @PathVariable Long ofertanteId,
+            @PathVariable Long actividadId) {
+        Ofertantes ofertante = ofertantesService.obtenerOfertantePorId(ofertanteId);
+        if (ofertante == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Obtener la actividad por ID
+        Actividades actividad = actividadesService.obtenerActividadPorId(actividadId);
+
+        // Verificar si la actividad existe y pertenece al ofertante
+        if (actividad != null && actividad.getOfertante().getId().equals(ofertanteId)) {
+            return ResponseEntity.ok(actividad);
+        }
+
+        // Si la actividad no existe o no pertenece al ofertante, devolver Not Found
+        return ResponseEntity.notFound().build();
+    }
+
+
     //metodo para asignarle una actividad a un ofertante
     @PostMapping("/ofertantes/{ofertanteId}/actividades")
     public ResponseEntity<Actividades> crearActividadParaOfertante(
@@ -111,6 +134,35 @@ public class OfertantesController {
             respuesta.put("mensaje", "Error al eliminar la actividad: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
         }
+    }
+
+    @PutMapping("/ofertantes/{ofertanteId}/actividades/{actividadId}")
+    public ResponseEntity<Actividades> actualizarActividadOfertante(
+            @PathVariable Long ofertanteId,
+            @PathVariable Long actividadId,
+            @RequestBody ActividadesRequestDTO actividadDTO) {
+        Ofertantes ofertante = ofertantesService.obtenerOfertantePorId(ofertanteId);
+        if (ofertante == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Obtener la actividad existente
+        Actividades actividadExistente = actividadesService.obtenerActividadPorId(actividadId);
+        if (actividadExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Actualizar los datos de la actividad
+        actividadExistente.setNombre(actividadDTO.getNombre());
+        actividadExistente.setDescripcion(actividadDTO.getDescripcion());
+        actividadExistente.setFec_inicio(actividadDTO.getFec_inicio());
+        actividadExistente.setFec_final(actividadDTO.getFec_final());
+        actividadExistente.setPrecio(actividadDTO.getPrecio());
+        actividadExistente.setMateriales(actividadDTO.getMateriales());
+
+        // Guardar la actividad actualizada
+        Actividades actividadActualizada = actividadesService.guardarActividad(actividadExistente);
+        return ResponseEntity.ok(actividadActualizada);
     }
 
     //METODOS SOBRE SOLICITUDES DEL LADO DEL OFERTANTE

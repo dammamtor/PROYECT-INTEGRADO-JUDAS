@@ -1,0 +1,49 @@
+/* Estilos para el contenedor principal */
+.container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilos para la tarjeta */
+.card {
+    width: 90%;
+    max-width: 500px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* Estilos para el encabezado de la tarjeta */
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Estilos para el título de la tarjeta */
+.card-title {
+    margin-bottom: 0;
+}
+
+/* Estilos para el cuerpo de la tarjeta */
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Estilos para los campos de entrada */
+.form-label {
+    font-weight: bold;
+}
+
+/* Estilos para los botones */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}

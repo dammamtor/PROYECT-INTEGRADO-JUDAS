@@ -60,4 +60,25 @@ export class ListaActividadesOfertanteComponent {
       }
     });
   }
+
+  irAcorregirActividad(idOfertante: number, idActividad: number): void {
+    this.router.navigate(['actualizar-actividad', idOfertante, idActividad]);
+  }
+
+  eliminarActividad(ofertanteId: number, actividadId: number): void {
+    this.ofertantesService.eliminarActividadOfertante(ofertanteId, actividadId)
+      .subscribe({
+        next: (respuesta: { eliminado: boolean }) => {
+          if (respuesta.eliminado) {
+            console.log('Actividad eliminada con éxito');
+            this.obtenerOfertantePorUsername(this.usuario);
+          } else {
+            console.error('Error al eliminar la actividad');
+          }
+        },
+        error: (error) => {
+          console.error('Error al eliminar la actividad:', error);
+        }
+      });
+  }
 }

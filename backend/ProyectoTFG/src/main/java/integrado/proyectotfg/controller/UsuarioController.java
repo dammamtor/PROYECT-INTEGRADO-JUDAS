@@ -147,4 +147,55 @@ public class UsuarioController {
         respuesta.put("eliminar", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
     }
+
+    @PutMapping("/usuarios/{id}")
+    public ResponseEntity<Usuario> actualizarUsuario(
+            @PathVariable Long id,
+            @RequestBody Usuario usuarioUpdate
+    ) {
+        Usuario usuarioExistente = usuarioServices.obtenerUsuarioPorId(id);
+        if (usuarioExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Actualizar los campos del usuario existente con los nuevos valores
+        usuarioExistente.setNombre(usuarioUpdate.getNombre());
+        usuarioExistente.setApellidos(usuarioUpdate.getApellidos());
+        usuarioExistente.setNif(usuarioUpdate.getNif());
+        usuarioExistente.setTelefono(usuarioUpdate.getTelefono());
+        usuarioExistente.setEmail(usuarioUpdate.getEmail());
+        usuarioExistente.setDireccion(usuarioUpdate.getDireccion());
+
+        // Guardar el usuario actualizado en la base de datos
+        Usuario usuarioActualizado = usuarioServices.guardarUsuario(usuarioExistente);
+
+        // Actualizar el consumidor asociado, si existe
+        Consumidores consumidor = consumidoresServices.obtenerConsumidorPorUsuario(usuarioExistente);
+        if (consumidor != null) {
+            consumidor.setNombre(usuarioUpdate.getNombre());
+            consumidor.setApellidos(usuarioUpdate.getApellidos());
+            consumidor.setNif(usuarioUpdate.getNif());
+            consumidor.setTelefono(usuarioUpdate.getTelefono());
+            consumidor.setCorreo(usuarioUpdate.getEmail());
+            consumidor.setDireccion(usuarioUpdate.getDireccion());
+
+            consumidoresServices.guardarConsumidor(consumidor);
+        }
+
+        // Actualizar el ofertante asociado, si existe
+        Ofertantes ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuarioExistente);
+        if (ofertante != null) {
+            ofertante.setNombre(usuarioUpdate.getNombre());
+            ofertante.setApellidos(usuarioUpdate.getApellidos());
+            ofertante.setNif(usuarioUpdate.getNif());
+            ofertante.setTelefono(usuarioUpdate.getTelefono());
+            ofertante.setCorreo(usuarioUpdate.getEmail());
+            ofertante.setDireccion(usuarioUpdate.getDireccion());
+
+            ofertantesServices.guardarOfertante(ofertante);
+        }
+
+        return ResponseEntity.ok(usuarioActualizado);
+    }
+
 }
