@@ -14,6 +14,9 @@ import { AceptarSolicitudesComponent } from './components/aceptar-solicitudes/ac
 import { ListaActividadesOfertanteComponent } from './components/lista-actividades-ofertante/lista-actividades-ofertante.component';
 import { CrearActividadComponent } from './components/crear-actividad/crear-actividad.component';
 import { UpdateActividadComponent } from './components/update-actividad/update-actividad.component';
+import { CrearReviewComponent } from './components/crear-review/crear-review.component';
+import { ListaReviewsComponent } from './components/lista-reviews/lista-reviews.component';
+import { UpdateUsarioComponent } from './components/update-usario/update-usario.component';
 
 export const routes: Routes = [
     {
@@ -39,6 +42,22 @@ export const routes: Routes = [
     {
         path: "consumidores/home/:user",
         component: HomeConsumidorComponent
+    },
+    {
+        path: "consumidores/home/:user/escribir-review/:idConsumidor/:idActividad",
+        component: CrearReviewComponent
+    },
+    {
+        path: "consumidores/home/:user/lista-reviews",
+        component: ListaReviewsComponent
+    },
+    {
+        path: "consumidores/home/:user/actualizar-usuario",
+        component: UpdateUsarioComponent
+    },
+    {
+        path: "ofertantes/home/:user/actualizar-usuario",
+        component: UpdateUsarioComponent
     },
     {
         path: "ofertantes",

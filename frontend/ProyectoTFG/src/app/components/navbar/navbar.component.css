@@ -1,4 +1,62 @@
-.nav-link:hover {
-    cursor: pointer;
-    text-decoration: underline; /* Puedes personalizar el efecto de subrayado según tus preferencias */
-}
+/* Estilos generales */
+header {
+    background-color: #343a40; /* Color de fondo oscuro */
+    padding: 1.5rem; /* Espaciado interno */
+    color: #ffffff; /* Color de texto blanco */
+  }
+  
+  .container {
+    max-width: 1140px; /* Ancho máximo del contenedor */
+    margin-left: auto; /* Centrado horizontal */
+    margin-right: auto; /* Centrado horizontal */
+  }
+  
+  /* Estilos para la lista de navegación */
+  nav {
+    margin-bottom: 0; /* Eliminar margen inferior */
+  }
+  
+  .nav {
+    list-style: none; /* Eliminar viñetas de la lista */
+    padding-left: 0; /* Eliminar el espacio izquierdo de la lista */
+  }
+  
+  .nav-link {
+    color: #ffffff; /* Color de texto blanco */
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    text-decoration: none; /* Eliminar subrayado de los enlaces */
+    cursor: pointer; /* Cambiar cursor a mano */
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline; /* Subrayar enlaces al pasar el ratón */
+  }
+  
+  /* Estilos para botones */
+  .btn {
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    border-radius: 0.25rem; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor a mano */
+  }
+  
+  .btn-outline-light {
+    color: #ffffff; /* Color de texto blanco */
+    border-color: #ffffff; /* Color del borde blanco */
+  }
+  
+  .btn-outline-light:hover {
+    background-color: #ffffff; /* Color de fondo blanco al pasar el ratón */
+    color: #343a40; /* Cambiar color de texto a oscuro al pasar el ratón */
+  }
+  
+  .btn-warning {
+    background-color: #ffc107; /* Color de fondo amarillo */
+    border-color: #ffc107; /* Color del borde amarillo */
+    color: #343a40; /* Color de texto oscuro */
+  }
+  
+  .btn-warning:hover {
+    background-color: #ffca28; /* Cambiar color de fondo al pasar el ratón */
+    border-color: #ffca28; /* Cambiar color del borde al pasar el ratón */
+  }
+  

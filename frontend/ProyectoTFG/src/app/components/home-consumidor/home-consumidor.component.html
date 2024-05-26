@@ -30,11 +30,17 @@
                             <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
                             <p><strong>Fecha de solicitud:</strong> {{ solicitud.fec_solicitud | date }}</p>
 
-                            <!-- Botón "Escribe tu review" que se muestra pero deshabilitado si la solicitud no está Aceptada -->
-                            <button class="btn btn-primary" [disabled]="solicitud.estado !== 'Aceptado'"
-                                (click)="escribirReview(solicitud)">
-                                Escribe tu reseña
-                            </button>
+                            <div *ngIf="consumidor">
+                                <button class="btn btn-primary" [disabled]="solicitud.estado !== 'Aceptado'"
+                                    (click)="escribirReview(consumidor.id, solicitud.actividad.id)">
+                                    Escribe tu reseña
+                                </button>
+                                <button class="btn btn-primary"
+                                    (click)="escribirReview(consumidor.id, solicitud.actividad.id)">
+                                    Escribe tu reseña
+                                </button>
+                            </div>
+
                         </li>
                     </ul>
                 </div>
@@ -54,6 +60,22 @@
                 <div class="card-body">
                     <p>No se encontraron datos del consumidor.</p>
                 </div>
+            </div>
+
+            <!-- Nuevo div para actualizar el usuario -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p>Si deseas actualizar tu usuario, haz clic en este botón:</p>
+                    <button class="btn btn-primary" (click)="actualizarUsuario()">Actualizar usuario</button>
+                </div>
+            </div>
+
+            <div class="alert alert-danger">
+                <p>Si no estás conforme con este sitio y buscas eliminar todo rastro tuyo, puedes darle click a este
+                    boton para eliminar tu usuario. OJO. <br>Una vez que hagas clic, esta acción no se puede deshacer.
+                </p>
+                <button class="btn btn-danger" *ngIf="consumidor && consumidor.usuario"
+                    (click)="eliminarUsuarioPorId(consumidor.usuario!.id)">Sí, borrar usuario</button>
             </div>
         </div>
     </div>

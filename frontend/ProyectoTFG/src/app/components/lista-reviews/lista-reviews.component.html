@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+<div class="container" *ngIf="resenas && resenas.length > 0">
+    <h2 class="mt-4 mb-3">Reseñas de consumidor {{userId}}</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12" *ngFor="let item of resenas; let i = index">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <p><strong>Actividad:</strong> {{ item.actividad.descripcion }}</p>
+                            <p><strong>Fecha de inicio:</strong> {{ item.actividad.fec_inicio | date }}</p>
+                            <p><strong>Fecha de finalización:</strong> {{ item.actividad.fec_final | date }}</p>
+                            <p><strong>Precio:</strong> {{ item.actividad.precio }}</p>
+                            <p><strong>Comentario:</strong> {{ item.comentario }}</p>
+                            <p><strong>Puntos:</strong> {{ item.puntos }}</p>
+                            <button class="btn btn-danger" (click)="borrarReview(item.id)">Eliminar Reseña</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

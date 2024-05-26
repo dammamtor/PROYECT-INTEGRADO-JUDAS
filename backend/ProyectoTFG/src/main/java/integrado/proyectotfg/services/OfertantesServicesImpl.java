@@ -99,7 +99,7 @@ public class OfertantesServicesImpl implements OfertantesServices {
         Ofertantes ofertante = ofertantesRepository.findByUsuario(usuario);
 
         if (ofertante == null) {
-            throw new RuntimeException("No se encontró un consumidor asociado al usuario proporcionado");
+            throw new RuntimeException("No se encontró un ofertante asociado al usuario proporcionado");
         }
 
         return ofertante;    }

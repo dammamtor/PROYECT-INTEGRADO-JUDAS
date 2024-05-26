@@ -9,4 +9,6 @@ public interface ReseñasServices {
 
     List<Reseñas> obtenerReseñaPorIDconsumidor(Long idConsumidor);
     List<Reseñas> listaReseñas(Long idOfertante);
+
+    boolean eliminarReseñaPorId(Long idReseña);
 }

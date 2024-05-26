@@ -18,7 +18,8 @@ import { CommonModule } from '@angular/common';
 export class HomeConsumidorComponent {
   public consumidor: Consumidores | null = null;
   public usuario: string | null = null;
-  public idConsumidor: number | null = null; // Agrega una nueva variable para almacenar el id del consumidor
+  public idConsumidor: number | null = null; 
+  public idActividad: number | null = null; 
   public solicitudesActividades: SolicitudesActividades[] = [];
 
   constructor(
@@ -85,10 +86,24 @@ export class HomeConsumidorComponent {
         }
       });
   }
-  escribirReview(solicitud: SolicitudesActividades): void {
-    // Aquí puedes redirigir a una página para que el usuario escriba su review
-    console.log("Escribir review para la solicitud:", solicitud);
-    // Por ejemplo:
-    // this.ruta.navigate(['/escribir-review', solicitud.id]);
+  escribirReview(idConsumidor: number, idActividad: number): void {
+    this.ruta.navigate(['/consumidores/home', this.usuario, 'escribir-review', idConsumidor, idActividad]);
   }
+
+  actualizarUsuario(): void{
+    this.ruta.navigate(['/consumidores/home', this.usuario, 'actualizar-usuario']);
+  }
+
+  eliminarUsuarioPorId(id: number): void {
+    this.usuarioService.eliminarUsuario(id).subscribe({
+      next: () => {
+        console.log("Usuario eliminado exitosamente");
+        this.ruta.navigate(['/']);
+      },
+      error: (error) => {
+        console.error("Error al intentar eliminar el usuario:", error);
+      }
+    });
+  }
+  
 }

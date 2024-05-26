@@ -36,6 +36,14 @@ public class UsuarioController {
         }
         return ResponseEntity.ok(usuarios);
     }
+    @GetMapping("/usuarios/{username}")
+    public ResponseEntity<Usuario> obtenerUsuarioPorUsername(@PathVariable String username) {
+        Usuario usuario = usuarioServices.obtenerUsuarioPorUsername(username);
+        if (usuario == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuario);
+    }
 
 
     @PostMapping("/usuarios")
@@ -130,14 +138,26 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
 
-        Consumidores consumidor = consumidoresServices.obtenerConsumidorPorUsuario(usuario);
-        if (consumidor != null) {
-            consumidoresServices.eliminarConsumidor(consumidor.getId());
+        Consumidores consumidor = null;
+        Ofertantes ofertante = null;
+        try {
+            // Manejar consumidor
+            consumidor = consumidoresServices.obtenerConsumidorPorUsuario(usuario);
+            if (consumidor != null) {
+                consumidoresServices.eliminarConsumidor(consumidor.getId());
+            }
+        } catch (Exception e) {
+            // Manejo de la excepción para consumidor
         }
 
-        Ofertantes ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuario);
-        if (ofertante != null) {
-            ofertantesServices.eliminarOfertante(ofertante.getId());
+        try {
+            // Manejar ofertante
+            ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuario);
+            if (ofertante != null) {
+                ofertantesServices.eliminarOfertante(ofertante.getId());
+            }
+        } catch (Exception e) {
+            // Manejo de la excepción para ofertante
         }
 
         // Eliminar al usuario
@@ -147,6 +167,7 @@ public class UsuarioController {
         respuesta.put("eliminar", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
     }
+
 
     @PutMapping("/usuarios/{id}")
     public ResponseEntity<Usuario> actualizarUsuario(
@@ -158,6 +179,48 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
 
+        try {
+            // Buscar el consumidor asociado
+            Consumidores consumidor = consumidoresServices.obtenerConsumidorPorUsuario(usuarioExistente);
+            // Actualizar el consumidor si existe
+            if (consumidor != null) {
+                consumidor.setNombre(usuarioUpdate.getNombre());
+                consumidor.setApellidos(usuarioUpdate.getApellidos());
+                consumidor.setNif(usuarioUpdate.getNif());
+                consumidor.setTelefono(usuarioUpdate.getTelefono());
+                consumidor.setCorreo(usuarioUpdate.getEmail());
+                consumidor.setDireccion(usuarioUpdate.getDireccion());
+
+                consumidoresServices.actualizarConsumidor(consumidor);
+            }
+        } catch (RuntimeException e) {
+            // Manejar la excepción de consumidor no encontrado
+            // Puedes registrar un mensaje de advertencia o simplemente continuar
+            // Aquí puedes dejar este espacio vacío si no deseas manejarlo específicamente
+            // logger.warn("No se encontró un consumidor asociado al usuario proporcionado", e);
+        }
+
+        try {
+            // Buscar el ofertante asociado
+            Ofertantes ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuarioExistente);
+            // Actualizar el ofertante si existe
+            if (ofertante != null) {
+                ofertante.setNombre(usuarioUpdate.getNombre());
+                ofertante.setApellidos(usuarioUpdate.getApellidos());
+                ofertante.setNif(usuarioUpdate.getNif());
+                ofertante.setTelefono(usuarioUpdate.getTelefono());
+                ofertante.setCorreo(usuarioUpdate.getEmail());
+                ofertante.setDireccion(usuarioUpdate.getDireccion());
+
+                ofertantesServices.actualizarOfertante(ofertante);
+            }
+        } catch (RuntimeException e) {
+            // Manejar la excepción de ofertante no encontrado
+            // Puedes registrar un mensaje de advertencia o simplemente continuar
+            // Aquí puedes dejar este espacio vacío si no deseas manejarlo específicamente
+            // logger.warn("No se encontró un ofertante asociado al usuario proporcionado", e);
+        }
+
         // Actualizar los campos del usuario existente con los nuevos valores
         usuarioExistente.setNombre(usuarioUpdate.getNombre());
         usuarioExistente.setApellidos(usuarioUpdate.getApellidos());
@@ -167,33 +230,7 @@ public class UsuarioController {
         usuarioExistente.setDireccion(usuarioUpdate.getDireccion());
 
         // Guardar el usuario actualizado en la base de datos
-        Usuario usuarioActualizado = usuarioServices.guardarUsuario(usuarioExistente);
-
-        // Actualizar el consumidor asociado, si existe
-        Consumidores consumidor = consumidoresServices.obtenerConsumidorPorUsuario(usuarioExistente);
-        if (consumidor != null) {
-            consumidor.setNombre(usuarioUpdate.getNombre());
-            consumidor.setApellidos(usuarioUpdate.getApellidos());
-            consumidor.setNif(usuarioUpdate.getNif());
-            consumidor.setTelefono(usuarioUpdate.getTelefono());
-            consumidor.setCorreo(usuarioUpdate.getEmail());
-            consumidor.setDireccion(usuarioUpdate.getDireccion());
-
-            consumidoresServices.guardarConsumidor(consumidor);
-        }
-
-        // Actualizar el ofertante asociado, si existe
-        Ofertantes ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuarioExistente);
-        if (ofertante != null) {
-            ofertante.setNombre(usuarioUpdate.getNombre());
-            ofertante.setApellidos(usuarioUpdate.getApellidos());
-            ofertante.setNif(usuarioUpdate.getNif());
-            ofertante.setTelefono(usuarioUpdate.getTelefono());
-            ofertante.setCorreo(usuarioUpdate.getEmail());
-            ofertante.setDireccion(usuarioUpdate.getDireccion());
-
-            ofertantesServices.guardarOfertante(ofertante);
-        }
+        Usuario usuarioActualizado = usuarioServices.actualizarUsuario(usuarioExistente);
 
         return ResponseEntity.ok(usuarioActualizado);
     }

@@ -9,6 +9,9 @@
         <li>
           <span class="nav-link px-2 text-white" (click)="irAActividades()">Actividades</span>
         </li>
+        <li *ngIf="rolUsuario === 'CONSUMER'">
+          <span class="nav-link px-2 text-white" (click)="irAReviews()">Reviews</span>
+        </li>
         <li *ngIf="rolUsuario === 'PROVIDER'">
           <span class="nav-link px-2 text-white" (click)="irACrearActividad()">Crear Actividad</span>
         </li>

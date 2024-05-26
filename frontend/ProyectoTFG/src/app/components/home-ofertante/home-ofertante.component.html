@@ -32,7 +32,7 @@
                             <ng-container *ngIf="solicitud.estado === 'Aceptado'">
                                 <p><strong>¡Esta solicitud ha sido aceptada!</strong></p>
                             </ng-container>
-                        
+
                             <ng-container *ngIf="ofertante && solicitud.estado !== 'Aceptado'">
                                 <button class="btn btn-success mt-2"
                                     (click)="redirigirAceptarSolicitud(ofertante.id, solicitud.id)">
@@ -56,6 +56,22 @@
                 <div class="card-body">
                     <p>No se encontraron datos del ofertante.</p>
                 </div>
+            </div>
+
+            <!-- Nuevo div para actualizar el usuario -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p>Si deseas actualizar tu usuario, haz clic en este botón:</p>
+                    <button class="btn btn-primary" (click)="actualizarUsuario()">Actualizar usuario</button>
+                </div>
+            </div>
+
+            <div class="alert alert-danger">
+                <p>Si no estás conforme con este sitio y buscas eliminar todo rastro tuyo, puedes darle click a este
+                    boton para eliminar tu usuario. OJO. <br>Una vez que hagas clic, esta acción no se puede deshacer.
+                </p>
+                <button class="btn btn-danger" *ngIf="ofertante && ofertante.usuario"
+                    (click)="eliminarUsuarioPorId(ofertante.usuario!.id)">Sí, borrar usuario</button>
             </div>
         </div>
     </div>

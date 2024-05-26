@@ -181,5 +181,16 @@ public class ConsumidoresController {
 
         return ResponseEntity.ok(listaOpiniones);
     }
+    @DeleteMapping("/reseñas/{idReseña}")
+    public ResponseEntity<Map<String, Boolean>> borrarReseña(@PathVariable Long idReseña) {
+        boolean eliminada = reseñasServices.eliminarReseñaPorId(idReseña);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("eliminar", eliminada);
+        if (eliminada) {
+            return ResponseEntity.ok(respuesta);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

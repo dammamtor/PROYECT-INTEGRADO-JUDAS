@@ -1,0 +1,39 @@
+/* Estilo para el contenedor principal */
+.container {
+    margin-top: 50px;
+}
+
+/* Estilo para el formulario */
+form {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los campos de entrada */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Estilo para las etiquetas */
+label {
+    font-weight: bold;
+}
+
+/* Estilo para el botón de enviar */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}

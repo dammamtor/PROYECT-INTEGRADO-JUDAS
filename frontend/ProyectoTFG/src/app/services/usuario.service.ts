@@ -32,4 +32,19 @@ export class UsuarioService {
     body.append('tipoSesion', tipoSesion); 
     return this.http.post<any>(`${this.url}/iniciar-sesion`, body);
   }
+
+  eliminarUsuario(id: number): Observable<any> {
+    console.log("ID DE USUARIO PARA ELIMINAR: ", id);
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  actualizarUsuario(id: number, usuario: Usuarios): Observable<any> {
+    console.log("ID DE USUARIO PARA ACTUALIZAR: ", id);
+    console.log("DATOS DEL USUARIO PARA ACTUALIZAR: ", usuario);
+    return this.http.put(`${this.url}/${id}`, usuario);
+  }
+  obtenerUsuarioPorUsername(username: string): Observable<Usuarios> {
+    console.log("OBTENER USUARIO POR USERNAME: ", username);
+    return this.http.get<Usuarios>(`${this.url}/${username}`);
+  }
 }

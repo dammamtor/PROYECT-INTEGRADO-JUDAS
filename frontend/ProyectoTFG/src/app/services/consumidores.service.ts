@@ -4,6 +4,7 @@ import { Consumidores } from '../models/Consumidores';
 import { Observable } from 'rxjs';
 import { SolicitudesActividades } from '../models/SolicitudesActividades';
 import { Reseñas } from '../models/Reseñas';
+import { ReviewPelado } from '../models/ReviewPelado';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,13 @@ export class ConsumidoresService {
   obtenerReseñaPorIDconsumidor(idConsumidor: number): Observable<Reseñas[]> {
     const url = `${this.url}/${idConsumidor}/opinion-actividades`;
     return this.http.get<Reseñas[]>(url);
+  }
+  borrarReseña(idReseña: number): Observable<{ eliminar: boolean }> {
+    const url = `http://localhost:8080/api/v1/reseñas/${idReseña}`;
+    return this.http.delete<{ eliminar: boolean }>(url);
+  }
+  publicarReview(idConsumidor: number, idActividad: number, review: ReviewPelado): Observable<ReviewPelado> {
+    const url = `${this.url}/${idConsumidor}/opinion-actividades/${idActividad}`;
+    return this.http.post<ReviewPelado>(url, review);
   }
 }

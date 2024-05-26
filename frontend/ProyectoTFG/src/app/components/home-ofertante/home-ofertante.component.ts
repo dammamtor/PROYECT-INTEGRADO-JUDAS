@@ -89,4 +89,20 @@ export class HomeOfertanteComponent {
   redirigirAceptarSolicitud(ofertanteId: number, idSolicitud: number): void {
     this.ruta.navigate([`/aceptar-solicitud/${ofertanteId}/${idSolicitud}`]);
   }
+
+  actualizarUsuario(): void{
+    this.ruta.navigate(['/ofertantes/home', this.usuario, 'actualizar-usuario']);
+  }
+
+  eliminarUsuarioPorId(id: number): void {
+    this.usuarioService.eliminarUsuario(id).subscribe({
+      next: () => {
+        console.log("Usuario eliminado exitosamente");
+        this.ruta.navigate(['/']);
+      },
+      error: (error) => {
+        console.error("Error al intentar eliminar el usuario:", error);
+      }
+    });
+  }
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ReseñasServicesImpl implements  ReseñasServices{
+public class ReseñasServicesImpl implements ReseñasServices {
     @Autowired
     ReseñasRepository repository;
     @Autowired
@@ -29,5 +29,15 @@ public class ReseñasServicesImpl implements  ReseñasServices{
     @Override
     public List<Reseñas> listaReseñas(Long idOfertante) {
         return repository.findByActividad_Ofertante_Id(idOfertante);
+    }
+
+    @Override
+    public boolean eliminarReseñaPorId(Long idReseña) {
+        if (repository.existsById(idReseña)) {
+            repository.deleteById(idReseña);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

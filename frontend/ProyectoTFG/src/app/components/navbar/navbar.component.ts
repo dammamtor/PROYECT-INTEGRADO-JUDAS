@@ -60,6 +60,11 @@ export class NavbarComponent {
       console.error('ID de ofertante no disponible');
     }
   }
+
+  irAReviews(): void {
+    this.router.navigate(['/consumidores/home', this.nombreUsuario,"lista-reviews"]);
+  }
+
   cerrarSesion(): void {
     this.authService.limpiarSesion();
     this.router.navigate(['/login']);
