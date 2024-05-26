@@ -35,12 +35,11 @@ export class HomeConsumidorComponent {
     if (userId) {
       console.log("ID RUTA: ", userId);
       this.usuarioService.usuario = userId;
-      this.usuario = userId; // Guarda el ID del usuario en la variable usuario
+      this.usuario = userId; 
       this.obtenerConsumidorPorUsername(userId);
-      this.guardarIdConsumidorLocalStorage(userId); // Llama al método para guardar el ID del consumidor en el localStorage
-      this.obtenerIdConsumidorLocalStorage(); // Llama al método para obtener el ID del consumidor del localStorage
+      this.guardarIdConsumidorLocalStorage(userId); 
+      this.obtenerIdConsumidorLocalStorage(); 
 
-      // Llama al método para obtener las solicitudes de actividades por el ID del consumidor
       if (this.idConsumidor) {
         this.obtenerSolicitudesActividadesPorConsumidor(this.idConsumidor);
       }
@@ -56,11 +55,9 @@ export class HomeConsumidorComponent {
         next: (consumidor: Consumidores) => {
           console.log('Consumidor:', consumidor);
           this.consumidor = consumidor;
-          // Aquí puedes manejar la respuesta del servicio
         },
         error: (error) => {
           console.error('Error al obtener el consumidor:', error);
-          // Aquí puedes manejar el error
         }
       });
   }

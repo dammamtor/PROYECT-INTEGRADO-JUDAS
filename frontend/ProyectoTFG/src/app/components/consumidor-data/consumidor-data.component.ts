@@ -26,36 +26,34 @@ export class ConsumidorDataComponent {
       this.consumidorId = +params['id'];
       console.log('ID del consumidor:', this.consumidorId);
       this.obtenerConsumidorPorId(this.consumidorId);
-      this.obtenerReseñasPorIdConsumidor(this.consumidorId); // Llamada al método para obtener reseñas
+      this.obtenerReseñasPorIdConsumidor(this.consumidorId);
     });
   }
 
   obtenerConsumidorPorId(id: number): void {
     this.consumidoresService.obtenerConsumidorPorId(id)
-      .subscribe(
-        (consumidor: Consumidores) => {
+      .subscribe({
+        next: (consumidor: Consumidores) => {
           console.log('Datos del consumidor:', consumidor);
           this.consumidor$ = consumidor;
         },
-        (error) => {
+        error: (error) => {
           console.error('Error al obtener el consumidor:', error);
-          // Aquí puedes manejar el error
         }
-      );
+      });
   }
 
   // Método para obtener las reseñas del consumidor por su ID
   obtenerReseñasPorIdConsumidor(id: number): void {
     this.consumidoresService.obtenerReseñaPorIDconsumidor(id)
-      .subscribe(
-        (reseñas: Reseñas[]) => {
+      .subscribe({
+        next: (reseñas: Reseñas[]) => {
           console.log('Reseñas del consumidor:', reseñas);
           this.reviews$ = reseñas;
         },
-        (error) => {
+        error: (error) => {
           console.error('Error al obtener las reseñas del consumidor:', error);
-          // Aquí puedes manejar el error
         }
-      );
+      });
   }
 }

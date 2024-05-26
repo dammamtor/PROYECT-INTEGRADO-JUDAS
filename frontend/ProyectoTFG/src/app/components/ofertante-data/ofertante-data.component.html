@@ -19,7 +19,22 @@
             </div>
         </div>
     </div>
-    
+    <h2 class="mt-4 mb-3">Actividades del ofertante</h2>
+    <div *ngIf="ofertante$.actividades && ofertante$.actividades.length > 0; else noActividades">
+        <div class="card mb-3" *ngFor="let actividad of ofertante$.actividades">
+            <div class="card-body">
+                <p class="card-text"><strong>ID:</strong> {{ actividad.id }}</p>
+                <p class="card-text"><strong>Nombre:</strong> {{ actividad.nombre }}</p>
+                <p class="card-text"><strong>Descripción:</strong> {{ actividad.descripcion }}</p>
+                <p class="card-text"><strong>Fecha inicio:</strong> {{ actividad.fec_inicio | date }} </p>
+                <p class="card-text"><strong>Fecha final:</strong> {{ actividad.fec_final | date }} </p>
+                <p class="card-text"><strong>Precio:</strong> {{ actividad.precio }} </p>
+            </div>
+        </div>
+    </div>
+    <ng-template #noActividades>
+        <p class="card-text">No hay actividades disponibles.</p>
+    </ng-template>
 </div>
 @if (review$.length > 0) {
 <div class="container">
@@ -31,7 +46,8 @@
                 <div class="col-md-12">
                     <div class="card mt-4">
                         <div class="card-body">
-                            <p><strong>Autor de la reseña: </strong>{{item.consumidor.nombre}} {{item.consumidor.apellidos}}</p>
+                            <p><strong>Autor de la reseña: </strong>{{item.consumidor.nombre}}
+                                {{item.consumidor.apellidos}}</p>
                             <p><strong>Actividad:</strong> {{ item.actividad.descripcion }}</p>
                             <p><strong>Fecha de inicio:</strong> {{ item.actividad.fec_inicio | date }}</p>
                             <p><strong>Fecha de finalización:</strong> {{ item.actividad.fec_final | date}}</p>

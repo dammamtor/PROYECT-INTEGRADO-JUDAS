@@ -35,12 +35,11 @@ export class HomeOfertanteComponent {
     if (userId) {
       console.log("ID RUTA: ", userId);
       this.usuarioService.usuario = userId;
-      this.usuario = userId; // Guarda el ID del usuario en la variable usuario
+      this.usuario = userId; 
       this.obtenerOfertantePorUsername(userId);
-      this.guardarIdOfertanteLocalStorage(userId); // Llama al método para guardar el ID del consumidor en el localStorage
-      this.obtenerIdOfertanteLocalStorage(); // Llama al método para obtener el ID del consumidor del localStorage
+      this.guardarIdOfertanteLocalStorage(userId); 
+      this.obtenerIdOfertanteLocalStorage(); 
 
-      // Llama al método para obtener las solicitudes de actividades por el ID del consumidor
       if (this.idOfertante) {
         this.obtenerSolicitudesActividadesPorOfertante(this.idOfertante);
       }
@@ -56,11 +55,9 @@ export class HomeOfertanteComponent {
         next: (ofertante: Ofertantes) => {
           console.log('Ofertante:', ofertante);
           this.ofertante = ofertante;
-          // Aquí puedes manejar la respuesta del servicio
         },
         error: (error) => {
           console.error('Error al obtener el ofertante:', error);
-          // Aquí puedes manejar el error
         }
       });
   }

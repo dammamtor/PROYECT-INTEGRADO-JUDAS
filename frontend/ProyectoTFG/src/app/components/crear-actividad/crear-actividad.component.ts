@@ -51,17 +51,17 @@ export class CrearActividadComponent {
 
   onSubmit(): void {
     this.ofertantesService.crearActividadParaOfertante(this.ofertanteId, this.actividadForm)
-      .subscribe(
-        (actividad) => {
+      .subscribe({
+        next: (actividad) => {
           console.log('Actividad creada:', actividad);
           setTimeout(() => {
             this.irAactividades();
           }, 2000);
         },
-        (error) => {
+        error: (error) => {
           console.error('Error al crear la actividad:', error);
         }
-      );
+      });
   }
 
   irAactividades(): void {

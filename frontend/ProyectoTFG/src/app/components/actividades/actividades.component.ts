@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { TipoActividadesService } from '../../services/tipo-actividades.service';
 import { TipoActividad } from '../../models/TipoActividad';
 import { AuthService } from '../../services/auth.service';
+import { Ofertantes } from '../../models/Ofertantes';
+import { OfertantesService } from '../../services/ofertantes.service';
 
 @Component({
   selector: 'app-actividades',
@@ -20,20 +22,30 @@ export class ActividadesComponent {
   tiposActividades: TipoActividad[] = [];
   filtroTipo: string | null = null;
   idConsumidor: number | null = null;
+  ofertantes: Ofertantes[] = []
 
   constructor(
-    private ruta: Router, 
+    private ruta: Router,
     private actividadesService: ActividadesService,
     private tiposService: TipoActividadesService,
-    private authService: AuthService 
-
+    private authService: AuthService,
+    private ofertantesService: OfertantesService
   ) { }
 
   ngOnInit(): void {
     this.listarActividades();
     this.listarTipoActividades();
-    this.obtenerIdConsumidor(); 
+    this.obtenerIdConsumidor();
+    this.listarOfertantes();
   }
+  listarOfertantes(): void {
+    this.ofertantesService.listarOfertantes()
+      .subscribe(ofertantes => {
+        this.ofertantes = ofertantes;
+        console.log(ofertantes);
+      });
+  }
+
 
   obtenerIdConsumidor(): void {
     this.idConsumidor = this.authService.obtenerIdConsumidorDeLocalStorage();
@@ -67,7 +79,7 @@ export class ActividadesComponent {
   filtrarPorTipo(event: any): void {
     const tipoNombre = event?.target?.value;
     this.filtroTipo = tipoNombre ? tipoNombre : null;
-  
+
     if (this.filtroTipo !== null) {
       this.actividadesService.listarActividadesPorTipo(this.filtroTipo).subscribe({
         next: (actividades) => {
@@ -79,7 +91,7 @@ export class ActividadesComponent {
         }
       });
     } else {
-      this.listarActividades(); // Si no se selecciona ningún tipo, listar todas las actividades nuevamente
+      this.listarActividades();
     }
   }
   irASolicitudActividad(idConsumidor: number, idActividad: number): void {

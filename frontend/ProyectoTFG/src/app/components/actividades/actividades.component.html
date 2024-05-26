@@ -12,39 +12,49 @@
                 </select>
             </div>
 
-            @if (actividades.length === 0) {
-            <div class="alert alert-warning mt-4" role="alert">
-                No hay actividades disponibles para el tipo seleccionado.
-            </div>
-            }
-            @else {
-            @for (item of actividades; track $index) {
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h5 class="card-title">{{ item.nombre }}</h5>
+            <div *ngIf="actividades.length === 0; else actividadesList">
+                <div class="alert alert-warning mt-4" role="alert">
+                    No hay actividades disponibles para el tipo seleccionado.
                 </div>
-                <div class="card-body">
-                    <p class="card-text">{{ item.descripcion }}</p>
-                    <p class="card-text">Fecha de inicio: {{ item.fec_inicio | date }}</p>
-                    <p class="card-text">Fecha final: {{ item.fec_final | date }}</p>
-                    <p class="card-text">Precio: {{ item.precio }} €</p>
-                    @if (item.materiales) {
-                    <p class="card-text">Materiales: {{ item.materiales }}</p>
-                    }
-                    <div class="text-center">
-                        @if (idConsumidor !== null) {
-                        <button type="button" class="btn btn-primary"
-                            (click)="irASolicitudActividad(idConsumidor, item.id)">Apúntate</button>
-                        } @else {
-                        <div class="alert alert-danger" role="alert">
-                            Por favor, inicia sesión para apuntarte a una actividad.
+            </div>
+
+            <ng-template #actividadesList>
+                <div class="card mb-3" *ngFor="let item of actividades">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ item.nombre }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <ng-container *ngIf="ofertantes">
+                            <ng-container *ngFor="let ofertante of ofertantes">
+                                <ng-container *ngIf="ofertante.actividades && ofertante.actividades.length > 0">
+                                    <ng-container *ngFor="let actividad of ofertante.actividades">
+                                        <p class="card-text" *ngIf="actividad.id == item.id">Autor de la actividad: {{
+                                            ofertante.nombre }} {{ofertante.apellidos}}</p>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+
+
+                        <p class="card-text">Descripcion: {{ item.descripcion }}</p>
+                        <p class="card-text">Fecha de inicio: {{ item.fec_inicio | date }}</p>
+                        <p class="card-text">Fecha final: {{ item.fec_final | date }}</p>
+                        <p class="card-text">Precio: {{ item.precio }} €</p>
+                        <p class="card-text" *ngIf="item.materiales">Materiales: {{ item.materiales }}</p>
+                        <p class="card-text" *ngIf="item.tipoActividad">Tipo de Actividad: {{ item.tipoActividad.nombre
+                            }}</p>
+                        <div class="text-center">
+                            <button *ngIf="idConsumidor !== null; else loginAlert" type="button" class="btn btn-primary"
+                                (click)="irASolicitudActividad(idConsumidor, item.id)">Apúntate</button>
                         </div>
-                        }
                     </div>
                 </div>
-            </div>
-            }
-            }
+            </ng-template>
 
+            <ng-template #loginAlert>
+                <div class="alert alert-danger" role="alert">
+                    Por favor, inicia sesión para apuntarte a una actividad.
+                </div>
+            </ng-template>
         </div>
     </div>

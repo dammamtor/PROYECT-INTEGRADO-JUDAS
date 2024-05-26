@@ -59,9 +59,9 @@ public class UsuarioController {
         Consumidores consumidor = new Consumidores();
         consumidor.setNombre(usuarioSave.getNombre());
         consumidor.setApellidos(usuarioSave.getApellidos());
-        consumidor.setNif(usuarioSave.getNif()); // Suponiendo que el Consumidor también tiene estos campos
+        consumidor.setNif(usuarioSave.getNif());
         consumidor.setTelefono(usuarioSave.getTelefono());
-        consumidor.setCorreo(usuarioSave.getEmail()); // O utilizar el correo del usuario
+        consumidor.setCorreo(usuarioSave.getEmail()); //
         consumidor.setDireccion(usuarioSave.getDireccion());
 
         // Establecer la relación bidireccional
@@ -147,7 +147,6 @@ public class UsuarioController {
                 consumidoresServices.eliminarConsumidor(consumidor.getId());
             }
         } catch (Exception e) {
-            // Manejo de la excepción para consumidor
         }
 
         try {
@@ -157,7 +156,6 @@ public class UsuarioController {
                 ofertantesServices.eliminarOfertante(ofertante.getId());
             }
         } catch (Exception e) {
-            // Manejo de la excepción para ofertante
         }
 
         // Eliminar al usuario
@@ -194,10 +192,7 @@ public class UsuarioController {
                 consumidoresServices.actualizarConsumidor(consumidor);
             }
         } catch (RuntimeException e) {
-            // Manejar la excepción de consumidor no encontrado
-            // Puedes registrar un mensaje de advertencia o simplemente continuar
-            // Aquí puedes dejar este espacio vacío si no deseas manejarlo específicamente
-            // logger.warn("No se encontró un consumidor asociado al usuario proporcionado", e);
+
         }
 
         try {
@@ -215,10 +210,7 @@ public class UsuarioController {
                 ofertantesServices.actualizarOfertante(ofertante);
             }
         } catch (RuntimeException e) {
-            // Manejar la excepción de ofertante no encontrado
-            // Puedes registrar un mensaje de advertencia o simplemente continuar
-            // Aquí puedes dejar este espacio vacío si no deseas manejarlo específicamente
-            // logger.warn("No se encontró un ofertante asociado al usuario proporcionado", e);
+
         }
 
         // Actualizar los campos del usuario existente con los nuevos valores

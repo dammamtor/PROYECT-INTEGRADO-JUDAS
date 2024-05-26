@@ -33,10 +33,7 @@ public class Consumidores {
     @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<SolicitudesActividades> solicitudesActividades = new HashSet<>();
-    @OneToMany(mappedBy = "consumidor", cascade = CascadeType.ALL)
-    private Set<HistorialActividades> historialActividades = new HashSet<>();
-    @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "consumidor")
-    private Set<Ofertantes> ofertantes = new HashSet<>();
+
 
     // Añade la relación con Usuario
     @OneToOne
@@ -119,21 +116,6 @@ public class Consumidores {
         this.solicitudesActividades = solicitudesActividades;
     }
 
-    public Set<HistorialActividades> getHistorialActividades() {
-        return historialActividades;
-    }
-
-    public void setHistorialActividades(Set<HistorialActividades> historialActividades) {
-        this.historialActividades = historialActividades;
-    }
-
-    public Set<Ofertantes> getOfertantes() {
-        return ofertantes;
-    }
-
-    public void setOfertantes(Set<Ofertantes> ofertantes) {
-        this.ofertantes = ofertantes;
-    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -155,8 +137,6 @@ public class Consumidores {
                 ", direccion='" + direccion + '\'' +
                 ", reseñas=" + reviews +
                 ", solicitudesActividades=" + solicitudesActividades +
-                ", historialActividades=" + historialActividades +
-                ", ofertantes=" + ofertantes +
                 ", usuario=" + usuario +
                 '}';
     }

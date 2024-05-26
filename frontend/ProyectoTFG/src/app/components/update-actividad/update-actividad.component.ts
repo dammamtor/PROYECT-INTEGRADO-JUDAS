@@ -50,7 +50,7 @@ export class UpdateActividadComponent {
           materiales: actividad.materiales,
           tipoActividadId: actividad.tipoActividadId
         };
-        console.log("Actividad recogida: ",  this.actividadForm);
+        console.log("Actividad recogida: ", this.actividadForm);
       },
       (error) => {
         console.error('Error al obtener los detalles de la actividad:', error);
@@ -60,17 +60,17 @@ export class UpdateActividadComponent {
 
   onSubmit(): void {
     this.ofertantesService.actualizarActividadOfertante(this.ofertanteId, this.idActividad, this.actividadForm)
-      .subscribe(
-        (actividad) => {
+      .subscribe({
+        next: (actividad) => {
           console.log('Actividad actualizada:', actividad);
           setTimeout(() => {
             this.irAactividades();
           }, 2000);
         },
-        (error) => {
+        error: (error) => {
           console.error('Error al actualizar la actividad:', error);
         }
-      );
+      });
   }
 
   irAactividades(): void {

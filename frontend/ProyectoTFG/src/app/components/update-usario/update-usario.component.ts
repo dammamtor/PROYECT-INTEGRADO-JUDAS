@@ -60,7 +60,6 @@ export class UpdateUsarioComponent {
       },
       (error) => {
         console.error("Error al obtener el usuario:", error);
-        // Manejo de errores
       }
     );
   }
@@ -75,7 +74,6 @@ export class UpdateUsarioComponent {
       },
       (error) => {
         console.error("Error al actualizar el usuario:", error);
-        // Manejo de errores
       }
     );
   }
