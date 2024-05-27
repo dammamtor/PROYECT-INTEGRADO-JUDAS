@@ -1,0 +1,142 @@
+[
+    {
+        "id": 1,
+        "nombre": "Clases de Tenis",
+        "descripcion": "Clases grupales de tenis para principiantes.",
+        "fec_inicio": "2024-06-01T00:00:00.000+00:00",
+        "fec_final": "2024-06-30T00:00:00.000+00:00",
+        "precio": "50.00",
+        "materiales": "Raquetas y pelotas proporcionadas",
+        "tipoActividad": {
+            "id": 1,
+            "nombre": "Aeróbicas",
+            "descripcion": "Actividades que implican ejercicio cardiovascular y aumento del ritmo cardíaco, como correr, nadar o hacer ciclismo."
+        }
+    },
+    {
+        "id": 2,
+        "nombre": "Excursión de Senderismo",
+        "descripcion": "Excursión guiada por el Parque Nacional. Descubre la naturaleza y disfruta del aire libre.",
+        "fec_inicio": "2024-07-15T00:00:00.000+00:00",
+        "fec_final": "2024-07-15T00:00:00.000+00:00",
+        "precio": "25.00",
+        "materiales": "Botas de senderismo y agua potable recomendadas",
+        "tipoActividad": {
+            "id": 5,
+            "nombre": "Individuales",
+            "descripcion": "Actividades que se realizan de manera individual, como tenis, golf, escalada, entre otros."
+        }
+    },
+    {
+        "id": 3,
+        "nombre": "Clases de Yoga",
+        "descripcion": "Clases de yoga para todos los niveles. Aprende a relajarte y mejorar tu flexibilidad.",
+        "fec_inicio": "2024-05-20T00:00:00.000+00:00",
+        "fec_final": "2024-06-30T00:00:00.000+00:00",
+        "precio": "30.00",
+        "materiales": "Tapete de yoga opcional",
+        "tipoActividad": {
+            "id": 8,
+            "nombre": "De flexibilidad y equilibrio",
+            "descripcion": "Actividades que se enfocan en mejorar la flexibilidad y el equilibrio, como yoga, pilates o tai chi."
+        }
+    },
+    {
+        "id": 5,
+        "nombre": "Entrenamiento de CrossFit",
+        "descripcion": "Sesiones intensivas de entrenamiento funcional. Mejora tu fuerza, resistencia y flexibilidad.",
+        "fec_inicio": "2024-06-15T00:00:00.000+00:00",
+        "fec_final": "2024-07-30T00:00:00.000+00:00",
+        "precio": "55.00",
+        "materiales": "Ropa deportiva cómoda y zapatillas adecuadas",
+        "tipoActividad": {
+            "id": 7,
+            "nombre": "De resistencia",
+            "descripcion": "Ejercicios que se centran en mejorar la resistencia muscular o cardiovascular, como el entrenamiento de circuito o el triatlón."
+        }
+    },
+    {
+        "id": 6,
+        "nombre": "Clases de Pilates",
+        "descripcion": "Entrenamiento centrado en la fuerza, la flexibilidad y la coordinación. Mejora tu postura y bienestar general.",
+        "fec_inicio": "2024-07-05T00:00:00.000+00:00",
+        "fec_final": "2024-08-30T00:00:00.000+00:00",
+        "precio": "35.00",
+        "materiales": "Mat de Pilates",
+        "tipoActividad": {
+            "id": 8,
+            "nombre": "De flexibilidad y equilibrio",
+            "descripcion": "Actividades que se enfocan en mejorar la flexibilidad y el equilibrio, como yoga, pilates o tai chi."
+        }
+    },
+    {
+        "id": 7,
+        "nombre": "Tour en Bicicleta",
+        "descripcion": "Explora la ciudad en bicicleta con guías locales. Descubre los lugares más emblemáticos y secretos de la ciudad.",
+        "fec_inicio": "2024-07-20T00:00:00.000+00:00",
+        "fec_final": "2024-07-20T00:00:00.000+00:00",
+        "precio": "20.00",
+        "materiales": "Bicicleta y casco proporcionados",
+        "tipoActividad": {
+            "id": 1,
+            "nombre": "Aeróbicas",
+            "descripcion": "Actividades que implican ejercicio cardiovascular y aumento del ritmo cardíaco, como correr, nadar o hacer ciclismo."
+        }
+    },
+    {
+        "id": 8,
+        "nombre": "Clases de Baile Latino",
+        "descripcion": "Aprende a bailar salsa, bachata y merengue. Diviértete y aprende nuevos movimientos.",
+        "fec_inicio": "2024-06-25T00:00:00.000+00:00",
+        "fec_final": "2024-08-15T00:00:00.000+00:00",
+        "precio": "30.00",
+        "materiales": "Calzado cómodo",
+        "tipoActividad": {
+            "id": 1,
+            "nombre": "Aeróbicas",
+            "descripcion": "Actividades que implican ejercicio cardiovascular y aumento del ritmo cardíaco, como correr, nadar o hacer ciclismo."
+        }
+    },
+    {
+        "id": 9,
+        "nombre": "Campamento de Surf",
+        "descripcion": "Aprende a surfear o mejora tus habilidades en nuestro campamento. Clases impartidas por instructores experimentados.",
+        "fec_inicio": "2024-07-10T00:00:00.000+00:00",
+        "fec_final": "2024-07-20T00:00:00.000+00:00",
+        "precio": "300.00",
+        "materiales": "Tabla de surf",
+        "tipoActividad": {
+            "id": 10,
+            "nombre": "Deportes extremos",
+            "descripcion": "Actividades que implican un alto nivel de riesgo, como surf, paracaidismo o escalada en roca."
+        }
+    },
+    {
+        "id": 10,
+        "nombre": "Clases de Boxeo",
+        "descripcion": "Entrenamiento de boxeo para todos los niveles. Mejora tu condición física y defensa personal.",
+        "fec_inicio": "2024-06-15T00:00:00.000+00:00",
+        "fec_final": "2024-08-31T00:00:00.000+00:00",
+        "precio": "40.00",
+        "materiales": "Guantes de boxeo proporcionados",
+        "tipoActividad": {
+            "id": 6,
+            "nombre": "De combate",
+            "descripcion": "Actividades que implican combate físico, como boxeo, judo, taekwondo, entre otros."
+        }
+    },
+    {
+        "id": 12,
+        "nombre": "Jugando en la cancha de platense",
+        "descripcion": "A donde el Momo que la cancha esta re vacia",
+        "fec_inicio": "2024-05-31T00:00:00.000+00:00",
+        "fec_final": "2024-06-12T00:00:00.000+00:00",
+        "precio": "10",
+        "materiales": "Libera a maestro splinter",
+        "tipoActividad": {
+            "id": 5,
+            "nombre": "Individuales",
+            "descripcion": "Actividades que se realizan de manera individual, como tenis, golf, escalada, entre otros."
+        }
+    }
+]

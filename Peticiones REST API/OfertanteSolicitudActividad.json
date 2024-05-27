@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "estado": "Pendiente",
+        "fec_solictitud": "2024-05-20T17:22:44.394+00:00",
+        "consumidor": {
+            "id": 5,
+            "nombre": "Facundo Fernando",
+            "apellidos": "Rodríguez Fernández",
+            "nif": "54321098M",
+            "telefono": "+34 688 999 777",
+            "correo": "juan.rodriguez@example.com",
+            "direccion": "Avenida Diagonal, 50, Barcelona",
+            "usuario": {
+                "id": 5,
+                "userName": "juanrodriguez_88",
+                "password": "RodriguezPass!",
+                "email": "juan.rodriguez@example.com",
+                "nombre": "Facundo Fernando",
+                "apellidos": "Rodríguez Fernández",
+                "role": "PROVIDER",
+                "nif": "54321098M",
+                "telefono": "+34 688 999 777",
+                "direccion": "Avenida Diagonal, 50, Barcelona"
+            }
+        },
+        "actividad": {
+            "id": 1,
+            "nombre": "Clases de Tenis",
+            "descripcion": "Clases grupales de tenis para principiantes.",
+            "fec_inicio": "2024-06-01T00:00:00.000+00:00",
+            "fec_final": "2024-06-30T00:00:00.000+00:00",
+            "precio": "50.00",
+            "materiales": "Raquetas y pelotas proporcionadas",
+            "tipoActividad": {
+                "id": 1,
+                "nombre": "Aeróbicas",
+                "descripcion": "Actividades que implican ejercicio cardiovascular y aumento del ritmo cardíaco, como correr, nadar o hacer ciclismo."
+            }
+        }
+    },
+    {
+        "id": 2,
+        "estado": "Pendiente",
+        "fec_solictitud": "2024-05-20T17:51:55.304+00:00",
+        "consumidor": {
+            "id": 5,
+            "nombre": "Facundo Fernando",
+            "apellidos": "Rodríguez Fernández",
+            "nif": "54321098M",
+            "telefono": "+34 688 999 777",
+            "correo": "juan.rodriguez@example.com",
+            "direccion": "Avenida Diagonal, 50, Barcelona",
+            "usuario": {
+                "id": 5,
+                "userName": "juanrodriguez_88",
+                "password": "RodriguezPass!",
+                "email": "juan.rodriguez@example.com",
+                "nombre": "Facundo Fernando",
+                "apellidos": "Rodríguez Fernández",
+                "role": "PROVIDER",
+                "nif": "54321098M",
+                "telefono": "+34 688 999 777",
+                "direccion": "Avenida Diagonal, 50, Barcelona"
+            }
+        },
+        "actividad": {
+            "id": 2,
+            "nombre": "Excursión de Senderismo",
+            "descripcion": "Excursión guiada por el Parque Nacional. Descubre la naturaleza y disfruta del aire libre.",
+            "fec_inicio": "2024-07-15T00:00:00.000+00:00",
+            "fec_final": "2024-07-15T00:00:00.000+00:00",
+            "precio": "25.00",
+            "materiales": "Botas de senderismo y agua potable recomendadas",
+            "tipoActividad": {
+                "id": 5,
+                "nombre": "Individuales",
+                "descripcion": "Actividades que se realizan de manera individual, como tenis, golf, escalada, entre otros."
+            }
+        }
+    }
+]

@@ -1,0 +1,136 @@
+[
+    {
+        "id": 1,
+        "nombre": "Carlos",
+        "apellidos": "Gómez Sánchez",
+        "nif": "41637285H",
+        "telefono": "+34 677 890 123",
+        "correo": "carlos.gomez@example.com",
+        "direccion": "Plaza España, 8, Valencia",
+        "usuario": {
+            "id": 1,
+            "userName": "carlosgomez_76",
+            "password": "G0m3zPass!",
+            "email": "carlos.gomez@example.com",
+            "nombre": "Carlos",
+            "apellidos": "Gómez Sánchez",
+            "role": "CONSUMER",
+            "nif": "41637285H",
+            "telefono": "+34 677 890 123",
+            "direccion": "Plaza España, 8, Valencia"
+        }
+    },
+    {
+        "id": 3,
+        "nombre": "María",
+        "apellidos": "Pérez López",
+        "nif": "77930712L",
+        "telefono": "+34 600 123 456",
+        "correo": "fanmejor@gmail.com",
+        "direccion": "Calle Mayor, 10, Sevilla",
+        "usuario": {
+            "id": 3,
+            "userName": "elmejorfan",
+            "password": "Segur@123",
+            "email": "fanmejor@gmail.com",
+            "nombre": "María",
+            "apellidos": "Pérez López",
+            "role": "CONSUMER",
+            "nif": "77930712L",
+            "telefono": "+34 600 123 456",
+            "direccion": "Calle Mayor, 10, Sevilla"
+        }
+    },
+    {
+        "id": 4,
+        "nombre": "Laura",
+        "apellidos": "González Martínez",
+        "nif": "76543210X",
+        "telefono": "+34 655 432 109",
+        "correo": "laura.gonzalez@example.com",
+        "direccion": "Calle Mayor, 10, Barcelona",
+        "usuario": {
+            "id": 4,
+            "userName": "lauragonzalez_85",
+            "password": "GonzalezPass!",
+            "email": "laura.gonzalez@example.com",
+            "nombre": "Laura",
+            "apellidos": "González Martínez",
+            "role": "CONSUMER",
+            "nif": "76543210X",
+            "telefono": "+34 655 432 109",
+            "direccion": "Calle Mayor, 10, Barcelona"
+        }
+    },
+    {
+        "id": 5,
+        "nombre": "Facundo Fernando",
+        "apellidos": "Rodríguez Fernández",
+        "nif": "54321098M",
+        "telefono": "+34 688 999 777",
+        "correo": "juan.rodriguez@example.com",
+        "direccion": "Avenida Diagonal, 50, Barcelona",
+        "usuario": {
+            "id": 5,
+            "userName": "juanrodriguez_88",
+            "password": "RodriguezPass!",
+            "email": "juan.rodriguez@example.com",
+            "nombre": "Facundo Fernando",
+            "apellidos": "Rodríguez Fernández",
+            "role": "PROVIDER",
+            "nif": "54321098M",
+            "telefono": "+34 688 999 777",
+            "direccion": "Avenida Diagonal, 50, Barcelona"
+        }
+    },
+    {
+        "id": 6,
+        "nombre": "Stephen",
+        "apellidos": "Strange",
+        "nif": "SS987P",
+        "telefono": "+1 (212) 555-0169",
+        "correo": "stephen@sanctums.com",
+        "direccion": "Sanctum Sanctorum, New York City",
+        "usuario": null
+    },
+    {
+        "id": 7,
+        "nombre": "Steve",
+        "apellidos": "Rogers",
+        "nif": "SR123T",
+        "telefono": "+1 (212) 555-0197",
+        "correo": "steve@avengers.com",
+        "direccion": "Avengers Tower, New York City",
+        "usuario": null
+    },
+    {
+        "id": 8,
+        "nombre": "Bruce",
+        "apellidos": "Banner",
+        "nif": "BB456Y",
+        "telefono": "+1 (212) 555-0153",
+        "correo": "bruce@hulklab.com",
+        "direccion": "Hulk Lab, New York City",
+        "usuario": null
+    },
+    {
+        "id": 9,
+        "nombre": "Natasha",
+        "apellidos": "Romanoff",
+        "nif": "NR789U",
+        "telefono": "+1 (212) 555-0128",
+        "correo": "natasha@shield.com",
+        "direccion": "SHIELD Headquarters, Washington D.C.",
+        "usuario": null
+    },
+    {
+        "id": 10,
+        "nombre": "Thor",
+        "apellidos": "Odinson",
+        "nif": "TO321W",
+        "telefono": "+1 (212) 555-0176",
+        "correo": "thor@asgard.com",
+        "direccion": "Asgardian Embassy, New York City",
+        "usuario": null
+    }
+]

@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "nombre": "Aeróbicas",
+        "descripcion": "Actividades que implican ejercicio cardiovascular y aumento del ritmo cardíaco, como correr, nadar o hacer ciclismo."
+    },
+    {
+        "id": 2,
+        "nombre": "Anaeróbicas",
+        "descripcion": "Ejercicios de alta intensidad que no dependen del oxígeno, como el levantamiento de pesas o ejercicios de fuerza."
+    },
+    {
+        "id": 3,
+        "nombre": "Acuáticas",
+        "descripcion": "Actividades realizadas en el agua, como natación, waterpolo o buceo."
+    },
+    {
+        "id": 4,
+        "nombre": "De equipo",
+        "descripcion": "Deportes que se juegan en equipos, como fútbol, baloncesto, voleibol, rugby, entre otros."
+    },
+    {
+        "id": 5,
+        "nombre": "Individuales",
+        "descripcion": "Actividades que se realizan de manera individual, como tenis, golf, escalada, entre otros."
+    },
+    {
+        "id": 6,
+        "nombre": "De combate",
+        "descripcion": "Actividades que implican combate físico, como boxeo, judo, taekwondo, entre otros."
+    },
+    {
+        "id": 7,
+        "nombre": "De resistencia",
+        "descripcion": "Ejercicios que se centran en mejorar la resistencia muscular o cardiovascular, como el entrenamiento de circuito o el triatlón."
+    },
+    {
+        "id": 8,
+        "nombre": "De flexibilidad y equilibrio",
+        "descripcion": "Actividades que se enfocan en mejorar la flexibilidad y el equilibrio, como yoga, pilates o tai chi."
+    },
+    {
+        "id": 9,
+        "nombre": "Deportes de invierno",
+        "descripcion": "Actividades realizadas en la nieve o hielo, como esquí, snowboard o patinaje sobre hielo."
+    },
+    {
+        "id": 10,
+        "nombre": "Deportes extremos",
+        "descripcion": "Actividades que implican un alto nivel de riesgo, como surf, paracaidismo o escalada en roca."
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "userName": "carlosgomez_76",
+        "password": "G0m3zPass!",
+        "email": "carlos.gomez@example.com",
+        "nombre": "Carlos",
+        "apellidos": "Gómez Sánchez",
+        "role": "CONSUMER",
+        "nif": "41637285H",
+        "telefono": "+34 677 890 123",
+        "direccion": "Plaza España, 8, Valencia"
+    },
+    {
+        "id": 3,
+        "userName": "elmejorfan",
+        "password": "Segur@123",
+        "email": "fanmejor@gmail.com",
+        "nombre": "María",
+        "apellidos": "Pérez López",
+        "role": "CONSUMER",
+        "nif": "77930712L",
+        "telefono": "+34 600 123 456",
+        "direccion": "Calle Mayor, 10, Sevilla"
+    },
+    {
+        "id": 4,
+        "userName": "lauragonzalez_85",
+        "password": "GonzalezPass!",
+        "email": "laura.gonzalez@example.com",
+        "nombre": "Laura",
+        "apellidos": "González Martínez",
+        "role": "CONSUMER",
+        "nif": "76543210X",
+        "telefono": "+34 655 432 109",
+        "direccion": "Calle Mayor, 10, Barcelona"
+    },
+    {
+        "id": 5,
+        "userName": "juanrodriguez_88",
+        "password": "RodriguezPass!",
+        "email": "juan.rodriguez@example.com",
+        "nombre": "Facundo Fernando",
+        "apellidos": "Rodríguez Fernández",
+        "role": "PROVIDER",
+        "nif": "54321098M",
+        "telefono": "+34 688 999 777",
+        "direccion": "Avenida Diagonal, 50, Barcelona"
+    }
+]
