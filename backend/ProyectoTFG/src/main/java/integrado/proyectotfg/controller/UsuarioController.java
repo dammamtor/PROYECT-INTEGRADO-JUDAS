@@ -47,9 +47,10 @@ public class UsuarioController {
 
 
     @PostMapping("/usuarios")
-    public ResponseEntity<Usuario> registrarUsuarioYConsumidor(
+    public ResponseEntity<Usuario> registrarUsuarioYConsumidorYOfertante(
             @RequestBody Usuario usuarioSave
     ) {
+        // Asignar el rol de "CONSUMER" al usuario
         usuarioSave.setRole("CONSUMER");
 
         // Guardar el usuario en la base de datos
@@ -61,22 +62,36 @@ public class UsuarioController {
         consumidor.setApellidos(usuarioSave.getApellidos());
         consumidor.setNif(usuarioSave.getNif());
         consumidor.setTelefono(usuarioSave.getTelefono());
-        consumidor.setCorreo(usuarioSave.getEmail()); //
+        consumidor.setCorreo(usuarioSave.getEmail());
         consumidor.setDireccion(usuarioSave.getDireccion());
 
-        // Establecer la relación bidireccional
+        // Establecer la relación bidireccional entre consumidor y usuario
         consumidor.setUsuario(usuarioGuardado);
         usuarioGuardado.setConsumidores(consumidor);
 
         // Guardar el consumidor en la base de datos
         consumidoresServices.guardarConsumidor(consumidor);
 
+        // Crear el ofertante asociado al usuario
+        Ofertantes ofertante = new Ofertantes();
+        ofertante.setNombre(usuarioSave.getNombre());
+        ofertante.setApellidos(usuarioSave.getApellidos());
+        ofertante.setNif(usuarioSave.getNif());
+        ofertante.setTelefono(usuarioSave.getTelefono());
+        ofertante.setCorreo(usuarioSave.getEmail());
+        ofertante.setDireccion(usuarioSave.getDireccion());
+
+        // Establecer la relación bidireccional entre ofertante y usuario
+        ofertante.setUsuario(usuarioGuardado);
+        usuarioGuardado.setOfertante(ofertante);
+
+        // Guardar el ofertante en la base de datos
+        ofertantesServices.guardarOfertante(ofertante);
+
+        usuarioServices.actualizarUsuario(usuarioGuardado);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioGuardado);
     }
-
-
-
-
 
     @PostMapping("/usuarios/iniciar-sesion")
     public ResponseEntity<String> iniciarSesion(
@@ -98,38 +113,13 @@ public class UsuarioController {
             usuarioServices.actualizarUsuario(usuario);
             return ResponseEntity.ok().body("{\"mensaje\": \"Iniciaste sesión como Consumidor\"}");
         } else if (tipoSesion.equals("2")) {
-            // Verificar si ya existe un ofertante asociado a este usuario
-            Ofertantes ofertante = ofertantesServices.obtenerOfertantePorUsuario(usuario);
-            if (ofertante == null) {
-                ofertante = new Ofertantes();
-                ofertante.setNombre(usuario.getNombre());
-                ofertante.setApellidos(usuario.getApellidos());
-                ofertante.setNif(usuario.getNif()); // Suponiendo que el Ofertante también tiene estos campos
-                ofertante.setTelefono(usuario.getTelefono());
-                ofertante.setCorreo(usuario.getEmail()); // O utilizar el correo del usuario
-                ofertante.setDireccion(usuario.getDireccion());
-                ofertante.setUsuario(usuario);
-
-                // Establecer la relación bidireccional
-                usuario.setOfertante(ofertante);
-
-                ofertantesServices.guardarOfertante(ofertante);
-
-                return ResponseEntity.ok("{\"mensaje\": \"Rol cambiado exitosamente a ofertante y se ha creado un nuevo ofertante asociado\"}");
-            }
-
-            // Cambiar el rol del usuario a ofertante
             usuario.setRole("PROVIDER");
             usuarioServices.actualizarUsuario(usuario);
-
-            // Retornar una respuesta exitosa
-            return ResponseEntity.ok("{\"mensaje\": \"Rol cambiado exitosamente a ofertante\"}");
+            return ResponseEntity.ok().body("{\"mensaje\": \"Iniciaste sesión como Ofertante\"}");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\": \"Tipo de sesión inválido\"}");
         }
     }
-
-
 
     @DeleteMapping("/usuarios/{id}")
     public ResponseEntity<Map<String, Boolean>> eliminarUsuario(@PathVariable Long id) {
